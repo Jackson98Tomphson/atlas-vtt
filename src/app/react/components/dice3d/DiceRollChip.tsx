@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '../../../../utils/cn';
@@ -27,7 +28,7 @@ export function DiceRollChip({ amount, applied, reduced }: DiceRollChipProps): R
       animate={!reduced && applied ? { scale: [1, 1.1, 1], y: [0, -3, 0] } : {}}
       transition={{ duration: 0.36, ease: [0.22, 0.61, 0.36, 1] }}
     >
-      <span className="atlas-dice-roll__chip-label">Modifier</span>
+      <span className="atlas-dice-roll__chip-label">{t('uiGeneral.diceRollChip_modifier')}</span>
       <span className="atlas-dice-roll__chip-amount">{signed(amount)}</span>
     </motion.span>
   );

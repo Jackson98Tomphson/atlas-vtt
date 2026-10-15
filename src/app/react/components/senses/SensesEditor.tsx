@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React, { useEffect, useId, useRef, useState } from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { Pencil, Plus, RotateCcw } from 'lucide-react';
@@ -82,7 +83,7 @@ export function SensesEditor({ senses, onChange, definitions, unit, emptyText, i
 
   return (
     <div className="atlas-senses" role="group" aria-labelledby={labelId}>
-      <span id={labelId} className="atlas-senses__label">Senses</span>
+      <span id={labelId} className="atlas-senses__label">{t('uiSettings.sensesEditor_senses')}</span>
       {following || rows.length > 0 ? (
         <ul className="atlas-senses__list" role="list">
           {following
@@ -108,14 +109,14 @@ export function SensesEditor({ senses, onChange, definitions, unit, emptyText, i
       ) : (
         <p className="atlas-senses__empty">{emptyText}</p>
       )}
-      {notRecognised.length > 0 && <p className="atlas-senses__empty">Not recognised: {notRecognised.join(', ')}</p>}
+      {notRecognised.length > 0 && <p className="atlas-senses__empty">{t('uiSettings.sensesEditor_notRecognised')}{' '}{notRecognised.join(', ')}</p>}
 
       {(following || available.length > 0 || (senses !== null && inheritedSenses.length > 0)) && (
         <div className="atlas-senses__actions">
           {following && (
             <Button variant="outline" size="sm" onClick={() => { setChosen(true); onChange(senseRows(inheritedSenses)); }}>
               <Pencil />
-              Edit senses
+              {t('uiSettings.sensesEditor_editSenses')}
             </Button>
           )}
           {available.length > 0 && (
@@ -123,7 +124,7 @@ export function SensesEditor({ senses, onChange, definitions, unit, emptyText, i
               <DropdownMenu.Trigger asChild>
                 <Button ref={setAddButton} variant="outline" size="sm">
                   <Plus />
-                  Add sense
+                  {t('uiSettings.sensesEditor_addSense')}
                 </Button>
               </DropdownMenu.Trigger>
               {/* Inside the dialog that holds the list: the menu stacks above it, and Escape in it stays in it. */}
@@ -154,7 +155,7 @@ export function SensesEditor({ senses, onChange, definitions, unit, emptyText, i
           {senses !== null && inheritedSenses.length > 0 && (
             <Button variant="outline" size="sm" onClick={() => { setAdding(false); setChosen(false); onChange(null); }}>
               <RotateCcw />
-              Follow statblock
+              {t('uiSettings.sensesEditor_followStatblock')}
             </Button>
           )}
         </div>

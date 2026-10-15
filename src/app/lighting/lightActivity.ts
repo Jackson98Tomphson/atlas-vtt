@@ -1,3 +1,4 @@
+import { t } from '../i18n';
 import type { LightSource } from '../types/lightingTypes';
 import { ambientOf } from './timesOfDay';
 
@@ -29,9 +30,9 @@ export type LightSchedule = 'always' | 'dusk' | 'night' | 'custom';
 
 /** When a placed light may be set to shine: always, or from a time of day on. `level` is its `activeBelowAmbient`. */
 export const LIGHT_SCHEDULES: { value: LightSchedule; label: string; level: number | undefined }[] = [
-  { value: 'always', label: 'Always', level: undefined },
-  { value: 'dusk', label: 'From dusk', level: ambientOf('dusk') },
-  { value: 'night', label: 'At night', level: ambientOf('night') },
+  { value: 'always', label: t('uiLighting.lightActivity_always'), level: undefined },
+  { value: 'dusk', label: t('uiLighting.lightActivity_fromDusk'), level: ambientOf('dusk') },
+  { value: 'night', label: t('uiLighting.lightActivity_atNight'), level: ambientOf('night') },
 ];
 
 /** The schedule a light is on; a level that is no time of day is named by its share of light. */

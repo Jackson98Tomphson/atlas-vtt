@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React, { useRef } from 'react';
 import { Button } from '../../../packages/components/primitives/button';
 import type { FieldValue, TemplateField } from '../../model/templateTypes';
@@ -35,15 +36,15 @@ export function ConflictChip({ field, conflict }: { field: TemplateField; confli
     valueOf(ref.current)?.focus({ preventScroll: true });
     choose(field);
   };
-  const text = conflict.canKeepMine ? `Changed in the note: ${shown(conflict.base)} → ${shown(now)}` : 'Changed in the note';
+  const text = conflict.canKeepMine ? t('uiStatblockDetails.conflictChip_changedInTheNoteBeforeAfter', { before: shown(conflict.base), after: shown(now) }) : t('uiStatblockDetails.conflictChip_changedInTheNote');
 
   return (
     <span ref={ref} className="atlas-sb-pane-conflict" role="group" aria-label={`${field.label} conflict`}>
       <span className="atlas-sb-pane-conflict__text">{text}</span>
       {conflict.canKeepMine && (
-        <Button type="button" variant="ghost" size="sm" onClick={() => answer(pane.keepMine)}>Keep mine</Button>
+        <Button type="button" variant="ghost" size="sm" onClick={() => answer(pane.keepMine)}>{t('uiStatblocks.conflictChip_keepMine')}</Button>
       )}
-      <Button type="button" variant="ghost" size="sm" onClick={() => answer(pane.keepNotes)}>Use the note&apos;s</Button>
+      <Button type="button" variant="ghost" size="sm" onClick={() => answer(pane.keepNotes)}>{t('uiStatblocks.conflictChip_useTheNoteS')}</Button>
     </span>
   );
 }

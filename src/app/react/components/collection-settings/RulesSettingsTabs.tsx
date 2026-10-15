@@ -27,14 +27,14 @@ export type SettingsTab =
 
 const TAB_LABELS: Record<SettingsTab, { label: string; icon: React.ReactNode }> = {
   system: { label: t('csm.tab.system'), icon: <Dices size={16} /> },
-  dice: { label: 'Dice', icon: <Dice5 size={16} /> },
+  dice: { label: t('uiSettings.rulesSettingsTabs_dice'), icon: <Dice5 size={16} /> },
   grid: { label: t('csm.tab.grid'), icon: <Grid3X3 size={16} /> },
   vision: { label: t('csm.tab.vision'), icon: <Eye size={16} /> },
   widgets: { label: t('csm.tab.widgets'), icon: <LayoutGrid size={16} /> },
   conditions: { label: t('csm.tab.conditions'), icon: <ShieldAlert size={16} /> },
-  resources: { label: 'Resources', icon: <Gauge size={16} /> },
+  resources: { label: t('uiSettings.rulesSettingsTabs_resources'), icon: <Gauge size={16} /> },
   initiative: { label: t('csm.tab.initiative'), icon: <Swords size={16} /> },
-  statblocks: { label: 'Statblocks', icon: <ScrollText size={16} /> },
+  statblocks: { label: t('uiSettings.rulesSettingsTabs_statblocks'), icon: <ScrollText size={16} /> },
   creatureFilters: { label: t('csm.tab.creatureFilters'), icon: <ListFilter size={16} /> },
   loot: { label: t('csm.tab.loot'), icon: <CoinIcon size={16} /> },
 };

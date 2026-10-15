@@ -24,8 +24,8 @@ export function DiceSettingsPanel(): React.ReactElement {
   return (
     <div className="atlas-command-palette-panel">
       <div className="atlas-command-palette-panel-column">
-        <h3 className="atlas-command-palette-panel-heading">Rolls</h3>
-        <SettingRow label="Roll display" hint={DICE_DISPLAY_HINTS[display]}>
+        <h3 className="atlas-command-palette-panel-heading">{t('uiGeneral.diceSettingsPanel_rolls')}</h3>
+        <SettingRow label={t('uiGeneral.diceSettingsPanel_rollDisplay')} hint={DICE_DISPLAY_HINTS[display]}>
           <SegmentedControl
             ariaLabel="Roll display"
             value={display}
@@ -44,9 +44,9 @@ export function DiceSettingsPanel(): React.ReactElement {
       </div>
 
       <div className="atlas-command-palette-panel-column">
-        <h3 className="atlas-command-palette-panel-heading">Dice</h3>
+        <h3 className="atlas-command-palette-panel-heading">{t('uiGeneral.diceSettingsPanel_dice')}</h3>
         <DiceColourStrip value={look.colour} previews={previews} onChange={(colour) => settings?.setDiceLook({ colour })} />
-        <SettingRow label="Numbers" hint="Medieval for high fantasy, sci-fi for futuristic games.">
+        <SettingRow label={t('uiGeneral.diceSettingsPanel_numbers')} hint={t('uiGeneral.diceSettingsPanel_medievalForHighFantasySciFiForFuturisticGames')}>
           <SegmentedControl
             ariaLabel="Dice numbers"
             value={look.font}

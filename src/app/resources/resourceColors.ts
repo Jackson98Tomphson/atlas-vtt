@@ -1,3 +1,4 @@
+import { t } from '../i18n';
 import type { ResourceDefinition, ResourceValue } from './resourceTypes';
 
 /** Below these shares of what is left, a resource that defeats its token turns yellow, then red. */
@@ -31,24 +32,24 @@ export function resourceColor(definition: ResourceDefinition, value: ResourceVal
  * yellow and red above are left out, so a low resource never looks like another one.
  */
 export const RESOURCE_COLORS: ReadonlyArray<{ value: string; label: string }> = [
-  { value: '#dc2626', label: 'Red' },
-  { value: '#f43f5e', label: 'Rose' },
-  { value: '#ec4899', label: 'Pink' },
-  { value: '#d946ef', label: 'Fuchsia' },
-  { value: '#a855f7', label: 'Purple' },
-  { value: '#8b5cf6', label: 'Violet' },
-  { value: '#6366f1', label: 'Indigo' },
-  { value: '#3b82f6', label: 'Blue' },
-  { value: '#0ea5e9', label: 'Sky' },
-  { value: '#06b6d4', label: 'Cyan' },
-  { value: '#14b8a6', label: 'Teal' },
-  { value: '#10b981', label: 'Emerald' },
-  { value: '#22c55e', label: 'Green' },
-  { value: '#84cc16', label: 'Lime' },
-  { value: '#facc15', label: 'Yellow' },
-  { value: '#f59e0b', label: 'Amber' },
-  { value: '#f97316', label: 'Orange' },
-  { value: '#b45309', label: 'Brown' },
-  { value: '#94a3b8', label: 'Steel' },
-  { value: '#e5e7eb', label: 'White' },
+  { value: '#dc2626', label: t('uiSettings.resourceColors_red') },
+  { value: '#f43f5e', label: t('uiSettings.resourceColors_rose') },
+  { value: '#ec4899', label: t('uiSettings.resourceColors_pink') },
+  { value: '#d946ef', label: t('uiSettings.resourceColors_fuchsia') },
+  { value: '#a855f7', label: t('uiSettings.resourceColors_purple') },
+  { value: '#8b5cf6', label: t('uiSettings.resourceColors_violet') },
+  { value: '#6366f1', label: t('uiSettings.resourceColors_indigo') },
+  { value: '#3b82f6', label: t('uiSettings.resourceColors_blue') },
+  { value: '#0ea5e9', label: t('uiSettings.resourceColors_sky') },
+  { value: '#06b6d4', label: t('uiSettings.resourceColors_cyan') },
+  { value: '#14b8a6', label: t('uiSettings.resourceColors_teal') },
+  { value: '#10b981', label: t('uiSettings.resourceColors_emerald') },
+  { value: '#22c55e', label: t('uiSettings.resourceColors_green') },
+  { value: '#84cc16', label: t('uiSettings.resourceColors_lime') },
+  { value: '#facc15', label: t('uiSettings.resourceColors_yellow') },
+  { value: '#f59e0b', label: t('uiSettings.resourceColors_amber') },
+  { value: '#f97316', label: t('uiSettings.resourceColors_orange') },
+  { value: '#b45309', label: t('uiSettings.resourceColors_brown') },
+  { value: '#94a3b8', label: t('uiSettings.resourceColors_steel') },
+  { value: '#e5e7eb', label: t('uiSettings.resourceColors_white') },
 ];

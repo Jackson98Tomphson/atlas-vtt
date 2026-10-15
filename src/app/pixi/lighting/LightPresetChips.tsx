@@ -1,3 +1,4 @@
+import { t } from '../../i18n';
 import React, { useId, useState } from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ChevronDown, Ellipsis } from 'lucide-react';
@@ -11,7 +12,7 @@ import type { LightEmission, LightKind } from '../../types/lightingTypes';
 import { lightMarkerLook } from './lightMarker';
 import { lightMarkerTheme } from './LightMarkers';
 
-const CUSTOM_LIGHT = 'Custom light';
+const CUSTOM_LIGHT = t('uiGeneralDetails.lightPresetChips_customLight');
 const AT_REST = { hovered: false, selected: false, dragging: false };
 
 const cssColor = (color: number): string => `#${color.toString(16).padStart(6, '0')}`;
@@ -49,7 +50,7 @@ export function LightPresetChips({ emission, presets, onChange }: LightPresetChi
   const style = { '--atlas-light-badge': cssColor(theme.background), '--atlas-light-tint': cssColor(look.glyphTint) } as React.CSSProperties;
   return (
     <div className="atlas-light-popover__kinds" role="group" aria-labelledby={labelId} style={style}>
-      <span id={labelId} hidden>Kind of light</span>
+      <span id={labelId} hidden>{t('uiLighting.lightPresetChips_kindOfLight')}</span>
       {chips.map((preset) => (
         <LabelTooltip key={preset.id} label={preset.name}>
           <button type="button" className="atlas-light-kind" aria-pressed={preset === current} onClick={() => onChange(emissionOf(preset))}>
@@ -94,7 +95,7 @@ function MoreLights({ more, current, onPick, onCustom }: MoreLightsProps): React
   ];
   return (
     <DropdownMenu.Root open={isOpen} onOpenChange={setIsOpen} modal={false}>
-      <LabelTooltip label={chosen ? `${chosen.name}, more lights` : 'More lights'}>
+      <LabelTooltip label={chosen ? t('uiGeneralDetails.lightPresetChips_nameMoreLights', { name: chosen.name }) : t('uiGeneralDetails.lightPresetChips_moreLights')}>
         <DropdownMenu.Trigger asChild>
           <button ref={setTrigger} type="button" className="atlas-light-kind atlas-light-kind--more" aria-pressed={chosen !== undefined}>
             {chosen ? <LightGlyph kind={chosen.kind} /> : <Ellipsis className="atlas-light-kind__dots" aria-hidden="true" />}

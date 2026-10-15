@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React, { useId, useMemo, useState } from 'react';
 import type { App } from 'obsidian';
 import { STANDING_LIST } from '../../../keyboard/tooltipEscape';
@@ -50,8 +51,8 @@ export function StatblockSourcePanel({ app, notes, selected, layer, onSelect, on
         <input
           type="text"
           className="atlas-te-gallery__search"
-          placeholder="Find a statblock"
-          aria-label="Find a statblock"
+          placeholder={t('uiStatblocks.statblockSourcePanel_findAStatblock')}
+          aria-label={t('uiStatblocks.statblockSourcePanel_findAStatblock')}
           role="combobox"
           aria-expanded="true"
           aria-controls={listId}
@@ -62,7 +63,7 @@ export function StatblockSourcePanel({ app, notes, selected, layer, onSelect, on
           onChange={(event) => setQuery(event.target.value)}
           onKeyDown={onKeyDown}
         />
-        <div id={listId} className="atlas-te-gallery__note-list" role="listbox" aria-label="Statblocks" {...STANDING_LIST}>
+        <div id={listId} className="atlas-te-gallery__note-list" role="listbox" aria-label={t('uiStatblocks.statblockSourcePanel_statblocks')} {...STANDING_LIST}>
           {listed.map((note, position) => (
             <div
               key={note.path}
@@ -78,12 +79,12 @@ export function StatblockSourcePanel({ app, notes, selected, layer, onSelect, on
               <span className="atlas-ctx-item__label">{note.name}</span>
             </div>
           ))}
-          {notes.length === 0 && <p className="atlas-te-gallery__empty">No statblocks in this vault yet</p>}
-          {notes.length > 0 && found.length === 0 && <p className="atlas-te-gallery__empty">No statblock matches</p>}
-          {found.length > listed.length && <p className="atlas-te-gallery__empty">Type to find the other {found.length - listed.length}</p>}
+          {notes.length === 0 && <p className="atlas-te-gallery__empty">{t('uiStatblocks.statblockSourcePanel_noStatblocksInThisVaultYet')}</p>}
+          {notes.length > 0 && found.length === 0 && <p className="atlas-te-gallery__empty">{t('uiStatblocks.statblockSourcePanel_noStatblockMatches')}</p>}
+          {found.length > listed.length && <p className="atlas-te-gallery__empty">{t('uiStatblocks.statblockSourcePanel_typeToFindTheOther')}{' '}{found.length - listed.length}</p>}
         </div>
       </div>
-      <ul className="atlas-te-gallery__grid atlas-te-gallery__grid--single" role="radiogroup" aria-label="Template from the statblock">
+      <ul className="atlas-te-gallery__grid atlas-te-gallery__grid--single" role="radiogroup" aria-label={t('uiStatblocks.statblockSourcePanel_templateFromTheStatblock')}>
         {chosen && template && (
           <GalleryCard
             app={app}
@@ -101,8 +102,8 @@ export function StatblockSourcePanel({ app, notes, selected, layer, onSelect, on
             }}
           />
         )}
-        {chosen && !template && <li className="atlas-te-gallery__empty">This statblock has no values to build a template from</li>}
-        {!chosen && notes.length > 0 && <li className="atlas-te-gallery__empty">Choose a statblock to build a template from its values</li>}
+        {chosen && !template && <li className="atlas-te-gallery__empty">{t('uiStatblocks.statblockSourcePanel_thisStatblockHasNoValuesToBuildATemplateFrom')}</li>}
+        {!chosen && notes.length > 0 && <li className="atlas-te-gallery__empty">{t('uiStatblocks.statblockSourcePanel_chooseAStatblockToBuildATemplateFromItsValues')}</li>}
       </ul>
     </div>
   );

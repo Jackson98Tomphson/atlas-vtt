@@ -1,3 +1,4 @@
+import { t } from '../../i18n';
 import React from 'react';
 import type { App } from 'obsidian';
 import { useLoadingReveal } from '../../packages/components/primitives/useLoadingReveal';
@@ -87,9 +88,9 @@ function ResolvedView(props: LinkedStatblockProps & { templateId: TemplateId | n
   }
   // The note stopped being native while Fantasy Statblocks is loaded: the plugin draws it.
   if (result.kind === 'statblock') return <FantasyView {...props} />;
-  if (result.kind === 'unreadable') return <Hint>This statblock could not be read.</Hint>;
-  if (result.fence) return <Hint>Install and enable the Fantasy Statblocks plugin to preview statblocks.</Hint>;
-  return <Hint>This note has no statblock.</Hint>;
+  if (result.kind === 'unreadable') return <Hint>{t('uiStatblocks.linkedStatblock_thisStatblockCouldNotBeRead')}</Hint>;
+  if (result.fence) return <Hint>{t('uiStatblocks.linkedStatblock_installAndEnableTheFantasyStatblocksPluginToPreviewStatblocks')}</Hint>;
+  return <Hint>{t('uiStatblocks.linkedStatblock_thisNoteHasNoStatblock')}</Hint>;
 }
 
 /**

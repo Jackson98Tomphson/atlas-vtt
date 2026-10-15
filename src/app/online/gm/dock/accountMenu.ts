@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import type { AccountApi } from '../account/AccountControl.ts';
 import { accessText, noticeText, UNREACHABLE_TEXT, type AccountView } from '../account/accountView.ts';
 import type { AccountInfo } from '../account/relayAccount.ts';
@@ -29,13 +30,13 @@ export function accountActions(account: AccountApi): Omit<AccountActions, 'start
   };
 }
 
-const INTRO = 'Players see this map in their browsers and move their own tokens.';
+const INTRO = t('uiOnlineDetails.accountMenu_playersSeeThisMapInTheirBrowsersAndMoveTheirOwnTokens');
 
 /** A code as the approve page shows it: two groups of four. */
 export const shownCode = (code: string): string => (code.length === 8 ? `${code.slice(0, 4)}-${code.slice(4)}` : code);
 
 /** The menu's title, with the signed-in account's handle at its end, and, after a table the server ended, the line that says how. */
-function intro(layer: HTMLElement, lost: LostTable | null, title = 'Online play', account: AccountInfo | null = null): HTMLElement {
+function intro(layer: HTMLElement, lost: LostTable | null, title = t('uiOnlineDetails.accountMenu_onlinePlay'), account: AccountInfo | null = null): HTMLElement {
   const head = layer.createDiv({ cls: 'atlas-online-text-block' });
   const row = head.createDiv({ cls: 'atlas-online-title-row' });
   row.createDiv({ cls: 'atlas-online-title', text: title });
@@ -58,19 +59,19 @@ function button(layer: HTMLElement, text: string, focusKey: string, onClick: () 
 /** The menu's foot for a signed-in GM: Sign out as a ghost in the bottom-left corner, the row's main action taking the rest. */
 function signedInFoot(layer: HTMLElement, actions: AccountActions): HTMLElement {
   const row = layer.createDiv({ cls: 'atlas-online-actions' });
-  const out = textButton(row, 'Sign out', () => actions.signOut(), 'ghost');
+  const out = textButton(row, t('uiOnlineDetails.accountMenu_signOut'), () => actions.signOut(), 'ghost');
   out.dataset.focusKey = 'sign-out';
   out.addClass('atlas-online-corner-button');
   return row;
 }
 
 function accountPageButton(layer: HTMLElement, actions: AccountActions, kind: 'plain' | 'cta' = 'plain', corner = false): void {
-  button(layer, 'Open account page', 'account-page', () => actions.openAccountPage(), kind, corner);
+  button(layer, t('uiOnlineDetails.accountMenu_openAccountPage'), 'account-page', () => actions.openAccountPage(), kind, corner);
 }
 
 /** Start online table: the menu's last control, in its bottom corners. */
 function startButton(layer: HTMLElement, starting: boolean, enabled: boolean, actions: AccountActions): void {
-  const start = button(layer, starting ? 'Starting…' : 'Start online table', 'start', () => actions.start(), 'cta', true);
+  const start = button(layer, starting ? 'Starting…' : t('uiOnlineDetails.accountMenu_startOnlineTable'), 'start', () => actions.start(), 'cta', true);
   start.disabled = !enabled || starting;
 }
 
@@ -82,7 +83,7 @@ function startButton(layer: HTMLElement, starting: boolean, enabled: boolean, ac
  */
 export function renderAccountMenu(layer: HTMLElement, account: AccountView, starting: boolean, lost: LostTable | null, actions: AccountActions): void {
   const signedIn = account.kind === 'can-host' || account.kind === 'no-access' ? account.account : null;
-  const head = intro(layer, lost, account.kind === 'waiting' ? 'Sign in to host' : undefined, signedIn);
+  const head = intro(layer, lost, account.kind === 'waiting' ? t('uiOnlineDetails.accountMenu_signInToHost') : undefined, signedIn);
   if (lost === 'no-access' && account.kind !== 'no-access') accountPageButton(layer, actions);
   switch (account.kind) {
     case 'signed-out': {
@@ -90,28 +91,28 @@ export function renderAccountMenu(layer: HTMLElement, account: AccountView, star
       help(head, INTRO);
       const notice = noticeText(account.notice);
       if (notice !== null) statusLine(head, { text: notice, tone: account.notice === 'server' ? 'amber' : 'red' });
-      button(layer, 'Sign in to host', 'sign-in', () => actions.signIn(), 'cta', true);
+      button(layer, t('uiOnlineDetails.accountMenu_signInToHost'), 'sign-in', () => actions.signIn(), 'cta', true);
       return;
     }
     case 'waiting': {
       if (account.userCode === null) {
-        statusLine(head, { text: 'Opening your browser…', tone: 'amber' });
+        statusLine(head, { text: t('uiOnline.accountMenu_openingYourBrowser'), tone: 'amber' });
       } else {
-        help(head, 'Approve this code in your browser. Atlas waits here.');
+        help(head, t('uiOnlineDetails.accountMenu_approveThisCodeInYourBrowserAtlasWaitsHere'));
         head.createDiv({ cls: 'atlas-online-code', text: shownCode(account.userCode), attr: { 'aria-label': `Code ${account.userCode.split('').join(' ')}` } });
       }
       const row = layer.createDiv({ cls: 'atlas-online-actions' });
-      button(row, 'Open again', 'reopen', () => actions.reopenSignIn(), 'plain', true).disabled = account.userCode === null;
-      button(row, 'Cancel', 'cancel', () => actions.cancelSignIn(), 'plain', true);
+      button(row, t('uiOnlineDetails.accountMenu_openAgain'), 'reopen', () => actions.reopenSignIn(), 'plain', true).disabled = account.userCode === null;
+      button(row, t('uiOnlineDetails.accountMenu_cancel'), 'cancel', () => actions.cancelSignIn(), 'plain', true);
       return;
     }
     case 'checking':
-      statusLine(head, { text: 'Checking your account…', tone: 'muted' });
+      statusLine(head, { text: t('uiOnline.accountMenu_checkingYourAccount'), tone: 'muted' });
       return startButton(layer, starting, false, actions);
     case 'unreachable':
       statusLine(head, { text: UNREACHABLE_TEXT, tone: 'red' });
-      help(head, 'Running tables are unaffected.');
-      button(layer, 'Try again', 'retry', () => actions.retry(), 'plain', true);
+      help(head, t('uiOnlineDetails.accountMenu_runningTablesAreUnaffected'));
+      button(layer, t('uiOnlineDetails.accountMenu_tryAgain'), 'retry', () => actions.retry(), 'plain', true);
       return;
     case 'no-access':
       help(head, accessText(account.reason));

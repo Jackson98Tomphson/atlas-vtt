@@ -1,3 +1,4 @@
+import { t } from '../i18n';
 import type { App } from 'obsidian';
 import { SettingsService } from '../services/SettingsService';
 
@@ -9,18 +10,18 @@ import { SettingsService } from '../services/SettingsService';
 export const EXPERIMENTAL_FEATURES = [
   {
     id: 'dynamicLighting',
-    label: 'Dynamic lighting',
-    hint: 'Walls, lights, token vision and senses: the Lighting tool, and a collection\'s Vision settings. While off, lit scenes show unlit and keep their walls and lights.',
+    label: t('uiGeneral.experimentalFeatures_dynamicLighting'),
+    hint: t('uiGeneral.experimentalFeatures_wallsLightsTokenVisionAndSensesTheLightingToolAndACollectionSVisionSet'),
   },
   {
     id: 'statblockEditor',
-    label: 'Statblock editor',
-    hint: 'Statblock roles and templates: a collection\'s Statblocks settings, and editing statblocks in Atlas. While off, statblocks show as before.',
+    label: t('uiGeneral.experimentalFeatures_statblockEditor'),
+    hint: t('uiGeneral.experimentalFeatures_statblockRolesAndTemplatesACollectionSStatblocksSettingsAndEditingStat'),
   },
   {
     id: 'onlinePlay',
-    label: 'Online play',
-    hint: 'Host a table that players join from their browsers: the online control at the bottom left of a map, and the account settings. While off, Atlas connects to nothing.',
+    label: t('uiGeneral.experimentalFeatures_onlinePlay'),
+    hint: t('uiGeneral.experimentalFeatures_hostATableThatPlayersJoinFromTheirBrowsersTheOnlineControlAtTheBottomL'),
   },
 ] as const;
 

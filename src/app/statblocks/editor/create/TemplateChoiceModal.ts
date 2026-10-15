@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import { SuggestModal, type App } from 'obsidian';
 import { findOffers, type TemplateOffer } from './templateOffers';
 
@@ -11,7 +12,7 @@ export class TemplateChoiceModal extends SuggestModal<TemplateOffer> {
 
   constructor(app: App, private readonly offers: readonly TemplateOffer[], private readonly done: (offer: TemplateOffer | null) => void) {
     super(app);
-    this.setPlaceholder('New statblock from…');
+    this.setPlaceholder(t('uiStatblocks.templateChoiceModal_newStatblockFrom'));
     this.setInstructions([
       { command: '↑↓', purpose: 'to choose' },
       { command: '↵', purpose: 'to name it' },

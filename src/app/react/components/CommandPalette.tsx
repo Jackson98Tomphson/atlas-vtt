@@ -86,8 +86,8 @@ const SETTINGS_PANEL_META: Record<SettingsPanelId, { title: string; icon: React.
   'token-settings': { title: t('palette.panel.tokens'), icon: <Users /> },
   'widget-settings': { title: t('palette.panel.widgets'), icon: <Palette /> },
   'local-player-view-settings': { title: t('palette.panel.localPlayerView'), icon: <MonitorUp /> },
-  'dice-settings': { title: 'Dice Settings', icon: <Dices /> },
-  'experimental-features': { title: 'Experimental Features', icon: <FlaskConical /> },
+  'dice-settings': { title: t('uiGeneral.commandPalette_diceSettings'), icon: <Dices /> },
+  'experimental-features': { title: t('uiGeneral.commandPalette_experimentalFeatures'), icon: <FlaskConical /> },
 };
 
 export function CommandPalette({ isOpen, onClose, toolbarRef, onCustomizeToolbar }: CommandPaletteProps): React.ReactElement | null {
@@ -407,15 +407,15 @@ export function CommandPalette({ isOpen, onClose, toolbarRef, onCustomizeToolbar
     {
       id: "dice-settings",
       icon: <Dices />,
-      label: "Dice settings",
-      keywords: ["roll", "3d", "speed", "fast", "result card", "toast"],
+      label: t('uiGeneral.commandPalette_diceSettings_23'),
+      keywords: ["roll", "3d", "speed", "fast", t('uiGeneralDetails.commandPalette_resultCard'), "toast"],
       section: "settings",
       hasSubmenu: true,
       submenu: [
         {
           id: "dice-all-settings",
           icon: null,
-          label: "Roll display",
+          label: t('uiGeneral.commandPalette_rollDisplay'),
           section: "dice",
           hasSubmenu: false,
         },
@@ -424,7 +424,7 @@ export function CommandPalette({ isOpen, onClose, toolbarRef, onCustomizeToolbar
     {
       id: "experimental-features",
       icon: <FlaskConical />,
-      label: "Experimental features",
+      label: t('uiGeneral.commandPalette_experimentalFeatures_25'),
       keywords: ["beta", "feature", "dynamic lighting", "walls", "lights", "vision"],
       section: "settings",
       hasSubmenu: true,
@@ -432,7 +432,7 @@ export function CommandPalette({ isOpen, onClose, toolbarRef, onCustomizeToolbar
         {
           id: "experimental-all-features",
           icon: null,
-          label: "Dynamic lighting",
+          label: t('uiGeneral.commandPalette_dynamicLighting'),
           section: "experimental",
           hasSubmenu: false,
         },

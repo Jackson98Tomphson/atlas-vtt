@@ -1,3 +1,4 @@
+import { t } from '../../../../i18n';
 import React, { forwardRef } from 'react'
 import { motion, type MotionStyle } from 'framer-motion'
 import { Redo2, Undo2 } from 'lucide-react'
@@ -41,8 +42,8 @@ function UndoBarFace(): React.ReactElement {
   const { canUndo, canRedo } = useUndoRedo()
   return (
     <div className="atlas-toolbar-face__undo-bar">
-      <ToolButton icon={Undo2} label="Undo" isActive={false} disabled={!canUndo} onClick={ignoreClick} />
-      <ToolButton icon={Redo2} label="Redo" isActive={false} disabled={!canRedo} onClick={ignoreClick} />
+      <ToolButton icon={Undo2} label={t('uiToolbar.toolbarFace_undo')} isActive={false} disabled={!canUndo} onClick={ignoreClick} />
+      <ToolButton icon={Redo2} label={t('uiToolbar.toolbarFace_redo')} isActive={false} disabled={!canRedo} onClick={ignoreClick} />
     </div>
   )
 }

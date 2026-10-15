@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React from 'react';
 import { X } from 'lucide-react';
 import { LabelTooltip } from '../../../packages/components/primitives/tooltip';
@@ -23,7 +24,7 @@ export function ChipRemove({ label, onRemove }: { label: string; onRemove: () =>
 export function UnreadChip({ part, onRemove }: { part: string; onRemove: () => void }): React.JSX.Element {
   return (
     <span className={cn('atlas-sb-pane-chip', 'atlas-sb-pane-pick--unread')}>
-      <LabelTooltip label="Not one of the options. It stays as written until you remove it.">
+      <LabelTooltip label={t('uiStatblocks.paneChips_notOneOfTheOptionsItStaysAsWrittenUntilYouRemoveIt')}>
         <span className="atlas-sb-pane-chip__text" tabIndex={0}>{part}</span>
       </LabelTooltip>
       <ChipRemove label={`Remove ${part}`} onRemove={onRemove} />

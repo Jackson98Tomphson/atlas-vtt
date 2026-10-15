@@ -1,3 +1,4 @@
+import { t } from '../i18n';
 /** How the dice look: the colour of their body and the face of their numerals. */
 
 /** `light` is card stock with graphite numerals, `dark` the reverse, `accent` Obsidian's accent colour. */
@@ -13,14 +14,14 @@ export interface DiceLook {
 export const DEFAULT_DICE_LOOK: Readonly<DiceLook> = { colour: 'light', font: 'medieval' };
 
 export const DICE_COLOUR_OPTIONS: readonly { value: DiceColour; label: string }[] = [
-  { value: 'light', label: 'Light' },
-  { value: 'dark', label: 'Dark' },
-  { value: 'accent', label: 'Accent' },
+  { value: 'light', label: t('uiGeneral.diceLook_light') },
+  { value: 'dark', label: t('uiGeneral.diceLook_dark') },
+  { value: 'accent', label: t('uiGeneral.diceLook_accent') },
 ];
 
 export const DICE_FONT_OPTIONS: readonly { value: DiceFont; label: string }[] = [
-  { value: 'medieval', label: 'Medieval' },
-  { value: 'scifi', label: 'Sci-fi' },
+  { value: 'medieval', label: t('uiGeneral.diceLook_medieval') },
+  { value: 'scifi', label: t('uiGeneral.diceLook_sciFi') },
 ];
 
 export function isDiceColour(value: unknown): value is DiceColour {

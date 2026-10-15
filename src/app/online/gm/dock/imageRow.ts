@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import { textButton } from './controls.ts';
 
 export interface ImageRowActions {
@@ -13,6 +14,6 @@ export interface ImageRowActions {
 export function renderImageRow(layer: HTMLElement, shown: boolean, actions: ImageRowActions): void {
   if (!shown) return;
   const row = layer.createDiv({ cls: 'atlas-online-image-row', attr: { role: 'status' } });
-  row.createSpan({ cls: 'atlas-online-image-row__text', text: 'Image shown' });
-  textButton(row, 'Hide', () => actions.hideImage()).dataset.focusKey = 'hide-image';
+  row.createSpan({ cls: 'atlas-online-image-row__text', text: t('uiOnline.imageRow_imageShown') });
+  textButton(row, t('uiOnlineDetails.imageRow_hide'), () => actions.hideImage()).dataset.focusKey = 'hide-image';
 }

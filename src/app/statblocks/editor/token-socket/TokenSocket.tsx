@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React, { useCallback, useEffect, useReducer, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -94,12 +95,12 @@ export function TokenSocket({ block, art }: TokenSocketProps): React.JSX.Element
 
   return (
     <>
-      <LabelTooltip label="Link token art">
+      <LabelTooltip label={t('uiStatblocks.tokenSocket_linkTokenArt')}>
         <TokenSocketFace
           ref={setSocket}
           shape={block.shape}
           art={src ? shown : null}
-          prompt={named ? 'Art not found' : 'Add token art'}
+          prompt={named ? t('uiStatblockDetails.tokenSocket_artNotFound') : t('uiStatblockDetails.tokenSocket_addTokenArt')}
           aria-haspopup="dialog"
           aria-expanded={open}
           onClick={() => setOpen((was) => !was)}

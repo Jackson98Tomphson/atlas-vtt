@@ -1,0 +1,25 @@
+import type { Message } from '../../types';
+
+export const sceneLight = {
+  'sceneLight.day': 'Giorno',
+  'sceneLight.dusk': 'Crepuscolo',
+  'sceneLight.night': 'Notte',
+  'sceneLight.dark': 'Buio totale',
+  'sceneLight.dynamic': 'Illuminazione dinamica',
+  'sceneLight.timeOfDay': 'Momento della giornata',
+  'sceneLight.ambient': 'Luce ambientale',
+  'sceneLight.ambientColour': 'Colore ambientale',
+  'sceneLight.forgetExplored': 'Dimentica aree esplorate',
+  'sceneLight.openSettings': 'Impostazioni dell’illuminazione…',
+  'sceneLight.settings': 'Impostazioni dell’illuminazione',
+  'sceneLight.closeSettings': 'Chiudi impostazioni dell’illuminazione',
+  'sceneLight.tokenVision': 'Visione dei token',
+  'sceneLight.tokenVisionOn': 'I giocatori vedono solo ciò che vedono i loro token',
+  'sceneLight.tokenVisionOff': 'I giocatori vedono tutto ciò che è illuminato',
+  'sceneLight.memory': 'Ricorda aree esplorate',
+  'sceneLight.memoryOn': 'Ciò che i token hanno visto resta sulla mappa dei giocatori',
+  'sceneLight.memoryOff': 'I giocatori vedono solo ciò che i loro token vedono ora',
+  'sceneLight.exploredColour': 'Colore delle aree esplorate',
+  'sceneLight.unexploredColour': 'Colore delle aree inesplorate',
+  'sceneLight.litFrom': 'Considera illuminato a partire da',
+} as const satisfies Record<string, Message>;

@@ -28,8 +28,8 @@ interface SuggestionSources {
 }
 
 const STATBLOCK_CHOICES = [
-  { label: 'yes', detail: 'with a statblock', value: 'linked' },
-  { label: 'no', detail: 'without a statblock', value: 'unlinked' },
+  { label: t('uiAssets.filterSuggestions_yes'), detail: t('uiGeneralDetails.filterSuggestions_withAStatblock'), value: 'linked' },
+  { label: t('uiAssets.filterSuggestions_no'), detail: t('uiGeneralDetails.filterSuggestions_withoutAStatblock'), value: 'unlinked' },
 ] as const;
 
 /** The template facet's options by name: a Fantasy Statblocks layout and a native template of one name are one value to type. */

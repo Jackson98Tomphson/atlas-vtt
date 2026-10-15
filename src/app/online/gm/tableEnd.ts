@@ -1,5 +1,5 @@
+import { getLocale, t } from '../../i18n';
 import { CLOSE } from '../protocol/index.ts';
-import { NO_HOSTING_TEXT } from './account/accountView.ts';
 
 /**
  * How the relay closed a table's connection for good: another Obsidian took the table over (it lives
@@ -19,10 +19,10 @@ export function tableEndOf(closeCode: number | null): TableEnd {
 }
 
 const END_TEXT: Readonly<Record<TableEnd, string>> = {
-  replaced: 'Another Obsidian took over the online table.',
-  'no-access': `The online table was closed. ${NO_HOSTING_TEXT}`,
-  superseded: 'The online table was closed. This account started another table.',
-  refused: 'The server closed the online table.',
+  replaced: t('uiMessages.tableReplaced'),
+  'no-access': t('uiMessages.tableNoHosting'),
+  superseded: t('uiMessages.tableSuperseded'),
+  refused: t('uiMessages.tableRefused'),
 };
 
 /** What the GM is told when a table ended that way. */
@@ -32,7 +32,7 @@ export const tableEndText = (end: TableEnd): string => END_TEXT[end];
  * When a table closes because its account may no longer host, written out in the GM's own time:
  * "12 October 2026 at 14:30". The relay names the moment; the account page is where access comes from.
  */
-export function closingText(closesAt: number, locale?: string, timeZone?: string): string {
+export function closingText(closesAt: number, locale = getLocale(), timeZone?: string): string {
   const when = new Date(closesAt).toLocaleString(locale, { dateStyle: 'long', timeStyle: 'short', ...(timeZone !== undefined && { timeZone }) });
-  return `This table closes on ${when}. Your account’s access to online play ended.`;
+  return t('uiMessages.tableClosing', { when });
 }

@@ -1,3 +1,4 @@
+import { t } from '../../../../i18n';
 /**
  * What Save does with the name typed (the template editor's save dialog):
  * the template's own name updates its file, another name saves a new
@@ -23,7 +24,7 @@ export interface SaveRequest {
 export interface SaveChoice {
   kind: SaveKind;
   /** The primary button's label. */
-  label: 'Update' | 'Save as new' | 'Save';
+  label: string;
   /** Why the name cannot be saved under; null while it can. */
   problem: string | null;
   /** The line under the name: what saving does. */
@@ -40,14 +41,14 @@ const sameName = (a: string, b: string): boolean => a.trim().toLowerCase() === b
 
 export function saveChoice(subject: SaveSubject, typed: string, taken: NameTaken): SaveChoice {
   const name = typed.trim();
-  const problem = templateNameProblem(name) ?? (taken(name) ? `There is already a template named “${name}”.` : null);
-  if (subject.unsaved) return { kind: 'new', label: 'Save', problem, hint: null };
+  const problem = templateNameProblem(name) ?? (taken(name) ? t('uiTemplateDetails.saveChoice_thereIsAlreadyATemplateNamedName', { name: name }) : null);
+  if (subject.unsaved) return { kind: 'new', label: t('uiTemplateEditor.saveChoice_save'), problem, hint: null };
   if (subject.builtIn) {
-    const own = sameName(name, subject.name) ? 'Built-in templates can\'t be changed. Give yours a name of its own.' : null;
-    return { kind: 'new', label: 'Save as new', problem: own ?? problem, hint: `${subject.name} is built in and stays as it is. Your changes are saved as a new template.` };
+    const own = sameName(name, subject.name) ? t('uiTemplateDetails.saveChoice_builtInTemplatesCanTBeChangedGiveYoursANameOfItsOwn') : null;
+    return { kind: 'new', label: t('uiTemplateEditor.saveChoice_saveAsNew'), problem: own ?? problem, hint: t('uiTemplateDetails.saveChoice_nameIsBuiltInAndStaysAsItIsYourChangesAreSavedAsANewTem', { name: subject.name }) };
   }
-  if (sameName(name, subject.name)) return { kind: 'update', label: 'Update', problem: null, hint: 'Statblocks that use this template show the change.' };
-  return { kind: 'new', label: 'Save as new', problem, hint: `${subject.name} stays as it is.` };
+  if (sameName(name, subject.name)) return { kind: 'update', label: t('uiTemplateEditor.saveChoice_update'), problem: null, hint: t('uiTemplateEditor.saveChoice_statblocksThatUseThisTemplateShowTheChange') };
+  return { kind: 'new', label: t('uiTemplateEditor.saveChoice_saveAsNew'), problem, hint: t('uiTemplateDetails.saveChoice_nameStaysAsItIs', { name: subject.name }) };
 }
 
 /** `base`, else `base 2`, `base 3`, … : the first name no template goes by. */

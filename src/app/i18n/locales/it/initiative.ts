@@ -1,0 +1,25 @@
+import type { Message } from '../../types';
+
+export const initiative = {
+  'initiative.abilityScore': 'Punteggio di caratteristica',
+  'initiative.abilityScoreHint': 'Il campo contiene un punteggio come DES 16, di cui viene aggiunto il modificatore: (punteggio − 10) ÷ 2, arrotondato per difetto',
+  'initiative.card': 'scheda dell’iniziativa',
+  'initiative.edit': 'Modifica iniziativa',
+  'initiative.editHint': 'Invio per salvare · Esc per annullare',
+  'initiative.fallback': 'Se un blocco statistiche non ha nessuno dei due: {field}',
+  'initiative.fallbackScore': 'Se un blocco statistiche non ha nessuno dei due: {field}, interpretato come punteggio di caratteristica',
+  'initiative.modifier': 'Modificatore',
+  'initiative.modifierField': 'Campo del modificatore',
+  'initiative.modifierFromStatblock': 'automatico',
+  'initiative.modifierHint': 'Il campo del blocco statistiche il cui valore viene aggiunto a ogni tiro. Se manca, viene usato il campo contrassegnato come iniziativa nel modello Atlas.',
+  'initiative.modifierPlaceholder': 'ad es. initiative',
+  'initiative.modifierReadError': 'Impossibile leggere i blocchi statistiche dei combattenti: nessun tiro effettuato',
+  'initiative.remove': 'Rimuovi dall’iniziativa',
+  'initiative.removeFallback': 'Rimuovi alternativa',
+  'initiative.roll': 'Tira iniziativa',
+  'initiative.statblocksLoading': { one: 'Fantasy Statblocks sta ancora leggendo il vault: {count} combattente ha tirato senza il modificatore del proprio blocco statistiche', other: 'Fantasy Statblocks sta ancora leggendo il vault: {count} combattenti hanno tirato senza il modificatore del proprio blocco statistiche' },
+  'initiative.total': 'Iniziativa',
+  'initiative.toBack': 'Sposta in fondo',
+  'initiative.toFront': 'Sposta in cima',
+  'initiative.token': 'Token',
+} as const satisfies Record<string, Message>;

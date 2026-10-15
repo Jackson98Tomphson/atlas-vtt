@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React, { useEffect, useId, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
@@ -77,19 +78,19 @@ export function LayoutImportDialog({ app, doc, layout, imported, statblocks, onO
         </div>
         <div className="atlas-te-dialog__footer">
           {running ? (
-            <Button type="button" variant="outline" size="sm" onClick={cancel}>Cancel</Button>
+            <Button type="button" variant="outline" size="sm" onClick={cancel}>{t('uiStatblocks.layoutImportDialog_cancel')}</Button>
           ) : (
             <>
               {onOpenTemplate && (
-                <Button type="button" variant="outline" size="sm" onClick={() => { onOpenTemplate(); close(); }}>Open template</Button>
+                <Button type="button" variant="outline" size="sm" onClick={() => { onOpenTemplate(); close(); }}>{t('uiStatblocks.layoutImportDialog_openTemplate')}</Button>
               )}
               {offersMove ? (
                 <>
-                  <Button type="button" variant="outline" size="sm" onClick={close}>Not now</Button>
+                  <Button type="button" variant="outline" size="sm" onClick={close}>{t('uiStatblocks.layoutImportDialog_notNow')}</Button>
                   <Button type="button" size="sm" onClick={adopt}>{moveLabel(total)}</Button>
                 </>
               ) : (
-                <Button type="button" size="sm" onClick={close}>Done</Button>
+                <Button type="button" size="sm" onClick={close}>{t('uiStatblocks.layoutImportDialog_done')}</Button>
               )}
             </>
           )}

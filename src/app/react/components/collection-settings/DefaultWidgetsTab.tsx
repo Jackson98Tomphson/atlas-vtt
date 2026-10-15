@@ -45,7 +45,7 @@ export function DefaultWidgetsTab({
   return (
     <>
       <p className="atlas-csm-hint">
-        These defaults apply to new maps of the collection.
+        {t('uiSettings.defaultWidgetsTab_theseDefaultsApplyToNewMapsOfTheCollection')}
       </p>
       {WIDGET_OPTIONS.map((w) => (
         <div key={w.key} className="atlas-csm-toggle-row">

@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React, { useEffect, useState } from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { FilePlus } from 'lucide-react';
@@ -8,7 +9,7 @@ import { cn } from '../../../../utils/cn';
 import type { RoleChoice } from './roleChoices';
 import './create-statblock.scss';
 
-export const CREATE_STATBLOCK_LABEL = 'Create statblock';
+export const CREATE_STATBLOCK_LABEL = t('uiStatblockDetails.roleMenu_createStatblock');
 /** Obsidian's icon for the entries that make a statblock. */
 const CREATE_ICON = 'file-plus';
 
@@ -59,7 +60,7 @@ export function NewStatblockButton({ choices, onChoose, onMenuOpenChange, classN
     return (
       <Button type="button" variant="ghost" size="sm" className={classes} onClick={() => onChoose(only.roleId)}>
         <FilePlus aria-hidden />
-        New statblock
+        {t('uiStatblocks.roleMenu_newStatblock')}
       </Button>
     );
   }
@@ -68,7 +69,7 @@ export function NewStatblockButton({ choices, onChoose, onMenuOpenChange, classN
       <DropdownMenu.Trigger asChild>
         <Button ref={setTrigger} type="button" variant="ghost" size="sm" className={classes}>
           <FilePlus aria-hidden />
-          New statblock…
+          {t('uiStatblocks.roleMenu_newStatblock_3')}
         </Button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal container={trigger?.ownerDocument.body}>

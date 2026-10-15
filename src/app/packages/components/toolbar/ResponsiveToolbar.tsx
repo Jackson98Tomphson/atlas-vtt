@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React, { Fragment, forwardRef, useCallback, useContext, useEffect, useId, useLayoutEffect, useRef, useState } from "react"
 import { cn } from "src/utils/cn"
 import { observeResize } from "../../../utils/observeResize"
@@ -148,7 +149,7 @@ export const ResponsiveToolbar = forwardRef<HTMLDivElement, ResponsiveToolbarPro
         ? <ToolbarEditOverflowMenu items={overflowItems} dropTarget={dragView.dropTarget} />
         : <ToolbarOverflowMenu items={overflowItems} />)}
       {end && <div className="atlas-toolbar-end">{end}</div>}
-      {withHandles && <span id={labelId} hidden>Toolbar</span>}
+      {withHandles && <span id={labelId} hidden>{t('uiToolbar.responsiveToolbar_toolbar')}</span>}
     </div>
   )
 })

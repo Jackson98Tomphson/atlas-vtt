@@ -1,3 +1,4 @@
+import { t } from '../../../../i18n';
 import React from 'react';
 import { Plus, X } from 'lucide-react';
 import { Button } from '../../../../packages/components/primitives/button';
@@ -40,7 +41,7 @@ function TabName({ tab, session, readOnly, onRemove }: { tab: SectionBlock; sess
   });
   return (
     <div className="atlas-te-setting__inline">
-      <input {...text} type="text" className="atlas-te-input" aria-label="Tab name" disabled={readOnly} spellCheck={false} />
+      <input {...text} type="text" className="atlas-te-input" aria-label={t('uiTemplateEditor.abilitiesOptions_tabName')} disabled={readOnly} spellCheck={false} />
       <ToolButton icon={X} label={`Remove ${tab.heading?.trim() || 'tab'}`} isActive={false} disabled={readOnly} onClick={onRemove} />
     </div>
   );
@@ -74,22 +75,22 @@ export function AbilitiesOptions({ block, session, readOnly }: AbilitiesOptionsP
     <>
       {field
         ? <EntryParts fields={fields} session={session} readOnly={readOnly} />
-        : <SettingNote>Name the list first: click its heading on the card.</SettingNote>}
+        : <SettingNote>{t('uiTemplateEditor.abilitiesOptions_nameTheListFirstClickItsHeadingOnTheCard')}</SettingNote>}
       {block.type === 'entries' && (
-        <Setting label="Tabs" wide>
+        <Setting label={t('uiTemplateEditor.abilitiesOptions_tabs')} wide>
           {() => (
             <div className="atlas-te-setting__list">
               <Button type="button" variant="outline" size="sm" disabled={readOnly || !mayTab || !field}
                 onClick={() => editTabs((current) => splitAbilities(current, block.id))}>
-                Split into tabs
+                {t('uiTemplateEditor.abilitiesOptions_splitIntoTabs')}
               </Button>
-              {!mayTab && <span className="atlas-te-setting__hint">A list side by side with others has no tabs. Give it a row of its own first.</span>}
+              {!mayTab && <span className="atlas-te-setting__hint">{t('uiTemplateEditor.abilitiesOptions_aListSideBySideWithOthersHasNoTabsGiveItARowOfItsOwnFirst')}</span>}
             </div>
           )}
         </Setting>
       )}
       {block.type === 'tabs' && (
-        <Setting label="Tabs" wide>
+        <Setting label={t('uiTemplateEditor.abilitiesOptions_tabs')} wide>
           {() => (
             <div className="atlas-te-setting__list">
               {tabs.map((tab) => (
@@ -99,7 +100,7 @@ export function AbilitiesOptions({ block, session, readOnly }: AbilitiesOptionsP
               <Button type="button" variant="ghost" size="sm" disabled={readOnly}
                 onClick={() => editTabs((current) => addAbilityTab(current, block.id))}>
                 <Plus aria-hidden="true" />
-                Add tab
+                {t('uiTemplateEditor.abilitiesOptions_addTab')}
               </Button>
             </div>
           )}

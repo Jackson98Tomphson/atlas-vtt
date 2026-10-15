@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React, { useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -17,7 +18,7 @@ export function AttributionText({ source, headingId }: { source: TemplateSource;
       <p className="atlas-te-attribution__text">{source.attribution}</p>
       <p className="atlas-te-attribution__text">{source.modification}</p>
       {source.trademarkNotice && <p className="atlas-te-attribution__text">{source.trademarkNotice}</p>}
-      <a className="atlas-te-attribution__link" href={source.licenceUrl} target="_blank" rel="noopener noreferrer">Read the licence</a>
+      <a className="atlas-te-attribution__link" href={source.licenceUrl} target="_blank" rel="noopener noreferrer">{t('uiStatblocks.attributionPopover_readTheLicence')}</a>
     </>
   );
 }
@@ -76,7 +77,7 @@ export function AttributionButton({ source, name, layer }: AttributionButtonProp
 
   return (
     <>
-      <LabelTooltip label={`Where ${name} comes from`}>
+      <LabelTooltip label={t('uiStatblockDetails.attributionPopover_whereNameComesFrom', { name: name })}>
         <Button
           ref={buttonRef}
           type="button"

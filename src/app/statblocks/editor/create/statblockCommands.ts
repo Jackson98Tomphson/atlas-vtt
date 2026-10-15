@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 /**
  * The statblock editor's commands and file menu items (§7.3): "New
  * statblock…", "New statblock here" on folders, "Edit statblock" on native
@@ -33,12 +34,12 @@ function addFileMenuItems(app: App, menu: Menu, file: TAbstractFile): void {
   if (!experimentalFeatureOn(app, 'statblockEditor')) return;
   if (file instanceof TFolder) {
     menu.addItem((item) => item
-      .setTitle('New statblock here')
+      .setTitle(t('uiMessages.newStatblockHere'))
       .setIcon('file-plus')
       .onClick(() => newStatblock(app, file.path)));
   } else if (file instanceof TFile && opensStatblockEditor(app, file.path)) {
     menu.addItem((item) => item
-      .setTitle('Edit statblock in Atlas')
+      .setTitle(t('uiMessages.editStatblockAtlas'))
       .setIcon('scroll-text')
       .onClick(() => { editInStatblockPane(app, file.path, { collectionId: null, from: 'command' }); }));
   } else if (file instanceof TFile && isFsFrontmatterNote(app, file)) {
@@ -60,7 +61,7 @@ export function registerStatblockEditorCommands(plugin: Plugin): void {
 
   plugin.addCommand({
     id: 'new-statblock',
-    name: 'New statblock…',
+    name: t('uiMessages.newStatblockCommand'),
     checkCallback: (checking) => {
       if (!experimentalFeatureOn(app, 'statblockEditor')) return false;
       if (!checking) newStatblock(app);
@@ -70,7 +71,7 @@ export function registerStatblockEditorCommands(plugin: Plugin): void {
 
   plugin.addCommand({
     id: 'edit-statblock',
-    name: 'Edit statblock',
+    name: t('uiMessages.editStatblockCommand'),
     checkCallback: (checking) => {
       const file = activeNote(app, (candidate) => opensStatblockEditor(app, candidate.path));
       if (!file) return false;

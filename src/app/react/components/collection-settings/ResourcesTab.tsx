@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 /**
  * ResourcesTab — the expendable resources tokens of a collection track (HP, Stress, ammunition…),
  * edited on a picture of a token: each resource sits in the socket where the map shows it.
@@ -110,20 +111,18 @@ export function ResourcesTab({ resources, onChange, fieldSuggestions }: Resource
     <MotionConfig reducedMotion="user">
       <div className="atlas-csm-resources" onKeyDown={onKeyDown}>
         <p className="atlas-csm-hint">
-          Click a socket to put a resource there, and drag it to another socket to move it. Each
-          resource reads its number from a field of the token&apos;s statblock; tokens whose statblock
-          lacks that field don&apos;t show it.
+          {t('uiSettings.resourcesTab_clickASocketToPutAResourceThereAndDragItToAnotherSocketToMoveItEachRes')}
         </p>
 
         <div className={cn('atlas-csm-token-stage', selected !== null && 'atlas-focused', lifted !== null && 'atlas-dragging')}
           role="presentation" onClick={(event) => { if (event.target === event.currentTarget) close(); }}>
-          <div className="atlas-csm-token-rig" role="group" aria-label="Resource sockets">
+          <div className="atlas-csm-token-rig" role="group" aria-label={t('uiSettings.resourcesTab_resourceSockets')}>
             {/* A token as the map draws it: the fighter of the starter tokens in Atlas' ring */}
             <span className="atlas-csm-token-art" aria-hidden="true"><TokenPortrait src={fighterArt} alt="" /></span>
-            <span className="atlas-csm-token-nameplate" aria-hidden="true">Name</span>
-            <span className="atlas-csm-token-caption atlas-csm-token-caption--bars" aria-hidden="true">Always shown</span>
-            <span className="atlas-csm-token-caption atlas-csm-token-caption--right" aria-hidden="true">On hover</span>
-            <span className="atlas-csm-token-caption atlas-csm-token-caption--left" aria-hidden="true">On hover</span>
+            <span className="atlas-csm-token-nameplate" aria-hidden="true">{t('uiSettings.resourcesTab_name')}</span>
+            <span className="atlas-csm-token-caption atlas-csm-token-caption--bars" aria-hidden="true">{t('uiSettings.resourcesTab_alwaysShown')}</span>
+            <span className="atlas-csm-token-caption atlas-csm-token-caption--right" aria-hidden="true">{t('uiSettings.resourcesTab_onHover')}</span>
+            <span className="atlas-csm-token-caption atlas-csm-token-caption--left" aria-hidden="true">{t('uiSettings.resourcesTab_onHover')}</span>
             {SOCKETS.map((socket) => (
               <ResourceSocket
                 key={socket.slot}
@@ -144,7 +143,7 @@ export function ResourcesTab({ resources, onChange, fieldSuggestions }: Resource
         </div>
 
         <div className="atlas-csm-resource-dock">
-          <div className={cn('atlas-csm-resource-dock__idle', current && 'atlas-hidden')}>Click a socket to set what it tracks</div>
+          <div className={cn('atlas-csm-resource-dock__idle', current && 'atlas-hidden')}>{t('uiSettings.resourcesTab_clickASocketToSetWhatItTracks')}</div>
           <AnimatePresence>
             {place && current && (
               <motion.div key="card" className="atlas-csm-resource-dock__card" {...CARD_MOTION}>

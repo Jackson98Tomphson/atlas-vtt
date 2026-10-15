@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 /** What the Change template dialog lists and says. Pure. */
 
 import { isReservedKey } from '../../model/reservedKeys';
@@ -30,8 +31,8 @@ export function templateGroups(templates: readonly LibraryTemplate[], roles: rea
   const ofRoles = templates.filter((entry) => roleNames.has(entry.template.id));
   const others = templates.filter((entry) => !roleNames.has(entry.template.id));
   const groups: TemplateGroup[] = [
-    { heading: 'Used by this collection', items: ofRoles.map((entry) => ({ entry, detail: roleNames.get(entry.template.id)?.join(', ') ?? null })) },
-    { heading: 'All templates', items: others.map((entry) => ({ entry, detail: entry.builtIn ? 'Built-in' : null })) },
+    { heading: t('uiMessages.usedCollection'), items: ofRoles.map((entry) => ({ entry, detail: roleNames.get(entry.template.id)?.join(', ') ?? null })) },
+    { heading: t('uiMessages.allTemplates'), items: others.map((entry) => ({ entry, detail: entry.builtIn ? t('uiMessages.builtIn') : null })) },
   ];
   return groups.filter((group) => group.items.length > 0);
 }

@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import { playerTone } from '../../protocol/index.ts';
 import type { WorkspaceLeaf } from 'obsidian';
 import type { AccountView } from '../account/accountView.ts';
@@ -165,7 +166,7 @@ export function badgeOf(snapshot: OnlineSnapshot, alert: boolean): Badge {
 export function seatsNoteOf(snapshot: OnlineSnapshot): string | null {
   const { seats } = snapshot;
   if (seats === null || snapshot.status !== 'online' || onlineCount(snapshot) < seats) return null;
-  return `Table full · ${seats === 1 ? '1 seat' : `${seats} seats`}`;
+  return t('uiOnlineDetails.panelModel_tableFullCountSeats', { count: seats });
 }
 
 const playersText = (count: number): string => (count === 1 ? '1 player' : `${count} players`);
@@ -175,9 +176,9 @@ export const closingOf = (snapshot: OnlineSnapshot): string | null => (snapshot.
 
 /** The button's tooltip. */
 export function tooltipOf(snapshot: OnlineSnapshot): string {
-  if (!isRunning(snapshot.status)) return 'Online play';
+  if (!isRunning(snapshot.status)) return t('uiOnlineDetails.panelModel_onlinePlay');
   const count = onlineCount(snapshot);
-  return count === 0 ? 'Online table · waiting for players' : `Online table · ${playersText(count)}`;
+  return count === 0 ? t('uiOnlineDetails.panelModel_onlineTableWaitingForPlayers') : t('uiOnlineDetails.panelModel_onlineTableCountPlayers', { count });
 }
 
 export type Tone = 'amber' | 'green' | 'red' | 'muted';
@@ -185,12 +186,12 @@ export type Tone = 'amber' | 'green' | 'red' | 'muted';
 /** The table's status in words, and its colour. */
 export function statusOf(snapshot: OnlineSnapshot): { readonly text: string; readonly tone: Tone } {
   switch (snapshot.status) {
-    case 'starting': return { text: 'Starting…', tone: 'amber' };
-    case 'connecting': return { text: 'Connecting…', tone: 'amber' };
-    case 'reconnecting': return { text: 'Reconnecting…', tone: 'amber' };
-    case 'online': return onlineCount(snapshot) === 0 ? { text: 'Online, waiting for players', tone: 'green' } : { text: `Online · ${playersText(onlineCount(snapshot))}`, tone: 'green' };
-    case 'refused': return { text: 'The server closed the table', tone: 'red' };
-    default: return { text: 'Not started', tone: 'muted' };
+    case 'starting': return { text: t('uiOnline.panelModel_starting'), tone: 'amber' };
+    case 'connecting': return { text: t('uiOnline.panelModel_connecting'), tone: 'amber' };
+    case 'reconnecting': return { text: t('uiOnline.panelModel_reconnecting'), tone: 'amber' };
+    case 'online': return onlineCount(snapshot) === 0 ? { text: t('uiOnline.panelModel_onlineWaitingForPlayers'), tone: 'green' } : { text: `Online · ${playersText(onlineCount(snapshot))}`, tone: 'green' };
+    case 'refused': return { text: t('uiOnline.panelModel_theServerClosedTheTable'), tone: 'red' };
+    default: return { text: t('uiOnline.panelModel_notStarted'), tone: 'muted' };
   }
 }
 

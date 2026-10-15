@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React from 'react';
 import { Skeleton, SkeletonGroup, skeletonTextWidth } from '../../../packages/components/primitives/Skeleton';
 import './statblock-skeleton.scss';
@@ -28,7 +29,7 @@ export function StatblockSkeleton({ className }: StatblockSkeletonProps): React.
 
 function StatblockSkeletonBody(): React.JSX.Element {
   return (
-    <SkeletonGroup label="Loading statblock…" className="atlas-statblock-skeleton">
+    <SkeletonGroup label={t('uiGeneral.statblockSkeleton_loadingStatblock')} className="atlas-statblock-skeleton">
       <div className="atlas-statblock-skeleton__heading">
         <Skeleton shape="text" width="48%" className="atlas-statblock-skeleton__name" />
         <Skeleton shape="text" width="32%" />

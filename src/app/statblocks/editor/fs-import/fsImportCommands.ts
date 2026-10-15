@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 /**
  * Importing a Fantasy Statblocks layout file (§6.2): the command "Import
  * Fantasy Statblocks layout…" picks one from the file system, the file menu
@@ -47,7 +48,7 @@ export function registerLayoutImportCommand(plugin: Plugin): void {
   const { app } = plugin;
   plugin.addCommand({
     id: 'import-fantasy-statblocks-layout',
-    name: 'Import Fantasy Statblocks layout…',
+    name: t('uiMessages.importLayoutCommand'),
     checkCallback: (checking) => {
       if (!experimentalFeatureOn(app, 'statblockEditor')) return false;
       if (!checking) pickLayoutFile(app, activeDocument);

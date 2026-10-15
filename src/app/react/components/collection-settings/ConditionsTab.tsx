@@ -23,14 +23,14 @@ interface ConditionsTabProps {
 type EffectChoice = ConditionEffect | 'none';
 
 const EFFECT_LABELS: Record<ConditionEffect, string> = {
-  blinded: 'Blinded',
-  invisible: 'Invisible',
-  airborne: 'Airborne',
-  undetected: 'Undetected',
+  blinded: t('uiSettingsDetails.conditionsTab_blinded'),
+  invisible: t('uiSettingsDetails.conditionsTab_invisible'),
+  airborne: t('uiSettingsDetails.conditionsTab_airborne'),
+  undetected: t('uiSettingsDetails.conditionsTab_undetected'),
 };
 
 const EFFECT_OPTIONS: SelectOption<EffectChoice>[] = [
-  { value: 'none', label: 'None' },
+  { value: 'none', label: t('uiSettings.conditionsTab_none') },
   ...CONDITION_EFFECTS.map((effect) => ({ value: effect, label: EFFECT_LABELS[effect] })),
 ];
 
@@ -98,9 +98,7 @@ export function ConditionsTab({
       </p>
       {sightEffects && (
         <p className="atlas-csm-hint">
-          Effects on sight: Blinded takes a token&apos;s sight; Invisible hides it from
-          sight that cannot see the invisible; Airborne hides it from tremorsense;
-          Undetected hides it from the players.
+          {t('uiSettings.conditionsTab_effectsOnSightBlindedTakesATokenSSightInvisibleHidesItFromSightThatCan')}
         </p>
       )}
 
@@ -108,8 +106,8 @@ export function ConditionsTab({
         <div className="atlas-csm-condition-list">
           {sightEffects && (
             <div className="atlas-csm-condition-head" aria-hidden="true">
-              <span>Condition</span>
-              <span>Effect on sight</span>
+              <span>{t('uiSettings.conditionsTab_condition')}</span>
+              <span>{t('uiSettings.conditionsTab_effectOnSight')}</span>
             </div>
           )}
           {conditions.map((cond, i) => (
@@ -134,7 +132,7 @@ export function ConditionsTab({
                 />
                 {sightEffects && (
                   <div className={`atlas-csm-condition-effect${conditionEffect(cond) ? '' : ' atlas-csm-condition-effect--none'}`}>
-                    <span id={`${effectLabel}-${cond.id}`} hidden>Effect on sight of {cond.name.trim() || 'this condition'}</span>
+                    <span id={`${effectLabel}-${cond.id}`} hidden>{t('uiMessages.conditionSightEffect', { name: cond.name.trim() || t('uiSettingsDetails.conditionsTab_thisCondition') })}</span>
                     <Select
                       value={conditionEffect(cond) ?? 'none'}
                       options={EFFECT_OPTIONS}

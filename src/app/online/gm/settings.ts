@@ -1,3 +1,4 @@
+import { t } from '../../i18n';
 import type { AtlasSettingSection } from '../../settings/settingSections';
 import type { AccountControl } from './account/AccountControl.ts';
 import { accountSections } from './account/accountSettings.ts';
@@ -33,9 +34,9 @@ export function onlineSettingsSections(host: OnlineSettingsHost): AtlasSettingSe
   return [
     ...accountSections(host.account),
     {
-      heading: 'Online diagnostics',
+      heading: t('uiMessages.diagnostics'),
       rows: [{
-        name: 'Send error reports',
+        name: t('uiMessages.sendReports'),
         desc: COMPANION_REPORTS_NOTE,
         render: (setting) => {
           setting.addToggle((toggle) => toggle.setValue(settings.reportErrors).onChange((value) => void save((current) => (current.reportErrors = value))));

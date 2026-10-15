@@ -1,3 +1,4 @@
+import { t } from '../../../../i18n';
 /** The entries of the template editor capsule's ⋯ menu (§2.3). */
 
 import type { ContextMenuEntry } from '../../../../react/components/context-menu/AtlasContextMenu';
@@ -27,11 +28,11 @@ export interface CapsuleMenuInput {
 export function capsuleMenuEntries(input: CapsuleMenuInput): ContextMenuEntry[] {
   const entries: ContextMenuEntry[] = (input.add ?? []).map((entry) => ({ type: 'item', label: entry.label, icon: entry.icon, onClick: entry.onClick }));
   if (input.startFromNote) entries.push({ type: 'item', label: START_FROM_NOTE, icon: 'file-text', onClick: input.startFromNote });
-  if (input.diceRolls) entries.push({ type: 'item', label: 'Dice rolls…', icon: 'dices', onClick: input.diceRolls });
-  if (input.json) entries.push({ type: 'item', label: input.json.open ? 'Close JSON' : 'Edit as JSON', icon: 'braces', onClick: input.json.toggle });
+  if (input.diceRolls) entries.push({ type: 'item', label: t('uiTemplateEditor.capsuleMenu_diceRolls'), icon: 'dices', onClick: input.diceRolls });
+  if (input.json) entries.push({ type: 'item', label: input.json.open ? t('uiTemplateDetails.capsuleMenu_closeJSON') : t('uiTemplateDetails.capsuleMenu_editAsJSON'), icon: 'braces', onClick: input.json.toggle });
   entries.push({
     type: 'item',
-    label: 'Delete template…',
+    label: t('uiTemplateEditor.capsuleMenu_deleteTemplate'),
     icon: 'trash-2',
     destructive: true,
     disabled: !input.deleteTemplate,

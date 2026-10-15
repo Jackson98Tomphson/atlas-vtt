@@ -1,3 +1,4 @@
+import { t } from '../../i18n';
 /**
  * Whether a value a note stores fits its field's declared type (§8.8). A
  * field's type may change after notes were written, and values are never
@@ -22,19 +23,19 @@ export interface ValueMisfit {
 type FitField = Pick<TemplateField, 'type' | 'options' | 'open' | 'several' | 'numbered' | 'unit'>;
 
 /** What each type holds, for the label and the sentence. */
-const TYPE_NOUNS: Readonly<Record<FieldType, { noun: string; label: string }>> = {
-  text: { noun: 'plain text', label: 'Not text' },
-  markdown: { noun: 'plain text', label: 'Not text' },
-  number: { noun: 'a number', label: 'Not a number' },
-  rating: { noun: 'a rating', label: 'Not a rating' },
-  dice: { noun: 'dice', label: 'Not dice' },
-  choice: { noun: 'one of the options', label: 'Not an option' },
-  list: { noun: 'a list', label: 'Not a list' },
-  scores: { noun: 'a list of table values', label: 'Not table values' },
-  entries: { noun: 'a list of entries', label: 'Not entries' },
-  pairs: { noun: 'names with numbers', label: 'Not pairs' },
-  image: { noun: 'an image path', label: 'Not an image' },
-  spells: { noun: 'a spell list', label: 'Not spells' },
+const TYPE_NOUNS: Readonly<Record<FieldType, { label: string }>> = {
+  text: { label: t('uiStatblocks.valueFit_notText') },
+  markdown: { label: t('uiStatblocks.valueFit_notText') },
+  number: { label: t('uiStatblocks.valueFit_notANumber') },
+  rating: { label: t('uiStatblocks.valueFit_notARating') },
+  dice: { label: t('uiStatblocks.valueFit_notDice') },
+  choice: { label: t('uiStatblocks.valueFit_notAnOption') },
+  list: { label: t('uiStatblocks.valueFit_notAList') },
+  scores: { label: t('uiStatblocks.valueFit_notTableValues') },
+  entries: { label: t('uiStatblocks.valueFit_notEntries') },
+  pairs: { label: t('uiStatblocks.valueFit_notPairs') },
+  image: { label: t('uiStatblocks.valueFit_notAnImage') },
+  spells: { label: t('uiStatblocks.valueFit_notSpells') },
 };
 
 /** Types whose text is checked by coercion; the others keep any text as it is written. */
@@ -101,5 +102,5 @@ function misfitProblem(field: FitField, value: FieldValue): string | null {
   if (CHECKED_TEXT.has(field.type) && isScalar(value)) return textProblem(field, valueText(value));
   // Several picks may be stored as a list, or as a record of options and numbers.
   if (picksChoice(field) && !holdsRecords(value)) return textProblem(field, valueText(value));
-  return SHAPE_FITS[field.type](value) ? null : `${shortQuote(value)} isn't ${TYPE_NOUNS[field.type].noun}.`;
+  return SHAPE_FITS[field.type](value) ? null : t(`uiMessages.invalid${field.type}`, { value: shortQuote(value) });
 }

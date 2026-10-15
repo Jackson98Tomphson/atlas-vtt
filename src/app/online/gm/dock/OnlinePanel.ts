@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import { renderClosingRow, type ClosingRowActions } from './closingRow.ts';
 import { inviteRow, surfaceHeader, textButton } from './controls.ts';
 import type { MenuEntry } from './dockMenu.ts';
@@ -74,14 +75,14 @@ function statusInWords(view: PanelView): string | null {
 
 /** "Stop the table for everyone?" with Cancel and Stop, at the panel's foot. */
 function stopConfirm(layer: HTMLElement, actions: PanelActions, redraw: () => void): void {
-  const row = layer.createDiv({ cls: 'atlas-online-confirm', attr: { role: 'group', 'aria-label': 'Stop the table' } });
-  row.createSpan({ cls: 'atlas-online-confirm__text', text: 'Stop for everyone?' });
-  const cancel = textButton(row, 'Cancel', () => {
+  const row = layer.createDiv({ cls: 'atlas-online-confirm', attr: { role: 'group', 'aria-label': t('uiOnlineDetails.onlinePanel_stopTheTable') } });
+  row.createSpan({ cls: 'atlas-online-confirm__text', text: t('uiOnline.onlinePanel_stopForEveryone') });
+  const cancel = textButton(row, t('uiOnlineDetails.onlinePanel_cancel'), () => {
     confirmingStop.delete(layer);
     redraw();
   }, 'ghost');
   cancel.dataset.focusKey = 'stop-cancel';
-  const stop = textButton(row, 'Stop table', () => {
+  const stop = textButton(row, t('uiOnlineDetails.onlinePanel_stopTable'), () => {
     confirmingStop.delete(layer);
     actions.stop();
   }, 'warning');
@@ -102,15 +103,15 @@ export function renderPanel(layer: HTMLElement, view: PanelView, actions: PanelA
   layer.empty();
   layer.addClass('atlas-online-panel');
   const entries: MenuEntry[] = [
-    { title: view.feedback.open ? 'Close feedback' : 'Send feedback', icon: 'message-square', run: () => actions.toggleFeedback() },
+    { title: view.feedback.open ? t('uiOnlineDetails.onlinePanel_closeFeedback') : t('uiOnlineDetails.onlinePanel_sendFeedback'), icon: 'message-square', run: () => actions.toggleFeedback() },
     ...gateEntries(view.gate, actions),
-    { title: 'Stop table', icon: 'power', warning: true, apart: true, run: () => {
+    { title: t('uiOnline.onlinePanel_stopTable'), icon: 'power', warning: true, apart: true, run: () => {
       confirmingStop.add(layer);
       redraw();
       layer.querySelector<HTMLElement>('[data-focus-key="stop-confirm"]')?.focus();
     } },
   ];
-  surfaceHeader(layer, 'Online table', view.status, statusInWords(view), entries, () => actions.close());
+  surfaceHeader(layer, t('uiOnlineDetails.onlinePanel_onlineTable'), view.status, statusInWords(view), entries, () => actions.close());
   renderClosingRow(layer, view.closing, actions);
   renderPausedRow(layer, view.gate, actions);
   renderImageRow(layer, view.imageShown, actions);

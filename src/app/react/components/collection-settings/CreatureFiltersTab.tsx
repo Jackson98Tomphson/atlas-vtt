@@ -103,7 +103,7 @@ export function CreatureFiltersTab({ hidden, onHiddenChange, custom, onCustomCha
       </div>
 
       <div className="atlas-csm-field">
-        <div className="atlas-csm-label">Other fields in this collection&apos;s statblocks</div>
+        <div className="atlas-csm-label">{t('uiSettings.creatureFiltersTab_otherFieldsInThisCollectionSStatblocks')}</div>
         <CreatureFieldSuggestions fields={unused} statblockCount={creatures.length} pending={pending} onAdd={addDiscovered} />
       </div>
     </>

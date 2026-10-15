@@ -1,3 +1,4 @@
+import { t } from '../i18n';
 import type { Setting } from 'obsidian';
 import { DICE_DISPLAY_HINTS, DICE_DISPLAY_OPTIONS, isDiceDisplay } from '../dice3d/diceDisplay';
 import { DICE_COLOUR_OPTIONS, DICE_FONT_OPTIONS, isDiceColour, isDiceFont } from '../dice3d/diceLook';
@@ -31,9 +32,9 @@ function addLookDropdown(
 /** How dice rolls are shown. */
 export function diceSettingsSection(settings: SettingsService): AtlasSettingSection {
   return {
-    heading: 'Dice',
+    heading: t('uiGeneral.diceDisplay_dice'),
     rows: [{
-      name: 'Roll display',
+      name: t('uiGeneral.commandPalette_rollDisplay'),
       desc: DICE_DISPLAY_HINTS[settings.getDiceDisplay()],
       aliases: ['dice', 'roll', 'animation', '3d', 'toast', 'speed', 'fast'],
       render: (setting) => {
@@ -54,8 +55,8 @@ export function diceSettingsSection(settings: SettingsService): AtlasSettingSect
         return unsubscribe;
       },
     }, {
-      name: 'Dice colour',
-      desc: 'Light card, dark with light numbers, or your accent colour. The command palette\'s Dice settings show each one.',
+      name: t('uiGeneral.diceColourStrip_diceColour'),
+      desc: t('uiMessages.diceColourHint'),
       aliases: ['dice', 'colour', 'color', 'skin', 'accent', 'dark'],
       render: (setting) => addLookDropdown(
         setting,
@@ -67,8 +68,8 @@ export function diceSettingsSection(settings: SettingsService): AtlasSettingSect
         },
       ),
     }, {
-      name: 'Dice numbers',
-      desc: 'Medieval for high fantasy, sci-fi for futuristic games. Also used for roll totals.',
+      name: t('uiMessages.diceNumbers'),
+      desc: t('uiMessages.diceNumbersHint'),
       aliases: ['dice', 'font', 'numbers', 'sci-fi', 'medieval', 'cyberpunk'],
       render: (setting) => addLookDropdown(
         setting,

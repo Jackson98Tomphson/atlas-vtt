@@ -1,3 +1,4 @@
+import { t } from '../../../../i18n';
 import React, { useId, useRef, useState } from 'react';
 import { Button } from '../../../../packages/components/primitives/button';
 import { EditorDialog } from '../inspector/EditorDialog';
@@ -47,18 +48,18 @@ export function SaveTemplateDialog({ anchor, subject, taken, onSave, onClose, on
   return (
     <EditorDialog
       anchor={anchor}
-      title={subject.unsaved ? 'Save template' : `Save ${subject.name}`}
+      title={subject.unsaved ? t('uiTemplateDetails.saveTemplateDialog_saveTemplate') : `Save ${subject.name}`}
       onClose={onClose}
       initialFocus={inputRef}
       footer={(
         <>
-          <Button type="button" variant="outline" size="sm" onClick={onClose}>Cancel</Button>
+          <Button type="button" variant="outline" size="sm" onClick={onClose}>{t('uiTemplateEditor.saveTemplateDialog_cancel')}</Button>
           <Button type="button" variant="default" size="sm" disabled={!ready} onClick={save}>{busy ? 'Saving…' : choice.label}</Button>
         </>
       )}
     >
       <div className="atlas-te-dialog__field">
-        <label htmlFor={inputId} className="atlas-te-dialog__label">Name</label>
+        <label htmlFor={inputId} className="atlas-te-dialog__label">{t('uiTemplateEditor.saveTemplateDialog_name')}</label>
         <input
           ref={inputRef}
           id={inputId}

@@ -1,3 +1,4 @@
+import { t } from '../../i18n';
 import { readLight } from '../../lighting/lightingObjects';
 import React, { useEffect, useId, useMemo, useRef } from 'react';
 import { AnimatePresence, motion, useIsPresent } from 'framer-motion';
@@ -75,7 +76,7 @@ function LightPopover({ lightId }: { lightId: string }): React.ReactElement | nu
       animate="visible"
       exit="exit"
       role="dialog"
-      aria-label="Light"
+      aria-label={t('uiLighting.lightPopover_light')}
       tabIndex={-1}
       inert={!present}
       onKeyDown={(event) => {
@@ -105,11 +106,11 @@ function LightPopover({ lightId }: { lightId: string }): React.ReactElement | nu
       <div className="atlas-light-popover__section atlas-light-popover__actions">
         <Button variant="ghost" size="sm" onClick={() => store.getState().updateLight(light.id, { hidden: !light.hidden })}>
           {light.hidden ? <Lightbulb /> : <LightbulbOff />}
-          <span>{light.hidden ? 'Turn on' : 'Turn off'}</span>
+          <span>{light.hidden ? t('uiGeneralDetails.lightPopover_turnOn') : t('uiGeneralDetails.lightPopover_turnOff')}</span>
         </Button>
         <Button variant="ghost" size="sm" className="atlas-light-popover__delete" onClick={() => store.getState().deleteLight(light.id)}>
           <Trash2 />
-          <span>Delete</span>
+          <span>{t('uiLighting.lightPopover_delete')}</span>
         </Button>
       </div>
     </motion.section>
@@ -124,7 +125,7 @@ function ShinesRow({ light, onChange }: { light: LightSource; onChange: (level: 
   const options = current.value === 'custom' ? [...LIGHT_SCHEDULES, current] : LIGHT_SCHEDULES;
   return (
     <div className="atlas-light-popover__flicker">
-      <span id={id}>Shines</span>
+      <span id={id}>{t('uiLighting.lightPopover_shines')}</span>
       <Select value={current.value} options={options} labelledBy={id}
         onChange={(value) => {
           const stop = LIGHT_SCHEDULES.find((schedule) => schedule.value === value);

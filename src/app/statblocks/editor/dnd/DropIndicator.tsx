@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React, { useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -17,7 +18,7 @@ function Line({ line }: { line: DropLine }): React.JSX.Element {
 function ViewOf({ view }: { view: DropView }): React.JSX.Element | null {
   switch (view.kind) {
     case 'line': return <Line line={view.line} />;
-    case 'into': return <div className="atlas-te-drop-into" style={boxStyle(view.outline)}><span className="atlas-te-drop-into__text">Drop blocks here</span></div>;
+    case 'into': return <div className="atlas-te-drop-into" style={boxStyle(view.outline)}><span className="atlas-te-drop-into__text">{t('uiStatblocks.dropIndicator_dropBlocksHere')}</span></div>;
     case 'refused': return null;
   }
 }

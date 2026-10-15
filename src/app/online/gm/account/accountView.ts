@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import type { AccessRefusal, AccountAnswer, AccountInfo, HostAccess } from './relayAccount.ts';
 
 /**
@@ -38,39 +39,38 @@ export function accountView(facts: AccountFacts): AccountView {
 }
 
 const ACCESS_TEXT: Readonly<Record<AccessRefusal, string>> = {
-  'no-access': 'Online play is in early access. Redeem an invite key on your account page.',
-  'access-ended': 'Your access to online play has ended. See your account page.',
-  'access-revoked': 'Your access to online play was withdrawn. See your account page.',
-  'account-restricted': 'Your account is restricted and cannot host online tables. See your account page.',
-  'terms-not-accepted': 'Accept the current Terms on your account page to host online tables.',
+  'no-access': t('uiMessages.noAccess'),
+  'access-ended': t('uiMessages.accessEnded'),
+  'access-revoked': t('uiMessages.accessRevoked'),
+  'account-restricted': t('uiMessages.accountRestricted'),
+  'terms-not-accepted': t('uiMessages.acceptTerms'),
 };
 
 /** What is said of an account that may not host, whatever the reason. */
-export const NO_HOSTING_TEXT = 'This account may not host online tables now.';
+export const NO_HOSTING_TEXT = t('uiMessages.noHosting');
 
 /** Why the relay says the account may not host, and where the way on is: the account page. */
-export const accessText = (reason: AccessRefusal | null): string => (reason === null ? `${NO_HOSTING_TEXT} See your account page.` : ACCESS_TEXT[reason]);
+export const accessText = (reason: AccessRefusal | null): string => (reason === null ? t('uiMessages.noHostingAccount') : ACCESS_TEXT[reason]);
 
-export const UNREACHABLE_TEXT = 'Can’t reach Atlas sign-in right now.';
-export const SERVER_SIGNED_OUT_TEXT = 'You were signed out. Running tables keep going.';
+export const UNREACHABLE_TEXT = t('uiMessages.unreachableSignIn');
+export const SERVER_SIGNED_OUT_TEXT = t('uiMessages.serverSignedOut');
 
 /** The line under the sign-in button that says how the last sign-in ended. */
 export function noticeText(notice: SignedOutNotice): string | null {
   switch (notice) {
-    case 'timed-out': return 'Sign-in timed out.';
-    case 'declined': return 'Sign-in was declined.';
+    case 'timed-out': return t('uiMessages.signInTimedOut');
+    case 'declined': return t('uiMessages.signInDeclined');
     case 'server': return SERVER_SIGNED_OUT_TEXT;
     case 'unreachable': return UNREACHABLE_TEXT;
     default: return null;
   }
 }
 
-const PLAN_NAMES: Readonly<Record<string, string>> = { beta: 'Early access', free: 'Free', host: 'Host', staff: 'Staff' };
+const PLAN_NAMES: Readonly<Record<string, string>> = { beta: t('uiMessages.earlyAccess'), free: t('uiMessages.freePlan'), host: 'Host', staff: 'Staff' };
 
 /** The plan in words: "Early access · up to 12 players". */
 export function planText(access: HostAccess): string {
-  const players = access.maxPlayers === 1 ? '1 player' : `${access.maxPlayers} players`;
-  return `${PLAN_NAMES[access.plan] ?? access.plan} · up to ${players}`;
+  return t('uiMessages.planPlayers', { plan: PLAN_NAMES[access.plan] ?? access.plan, count: access.maxPlayers });
 }
 
 /** "Mara (@mara)", or the handle alone where the name is the handle. */

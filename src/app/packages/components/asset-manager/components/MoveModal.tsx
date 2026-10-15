@@ -41,7 +41,7 @@ export function MoveModal({
         </div>
         <div className="atlas-asset-manager-move-body">
           <p className="atlas-asset-manager-move-info">
-            Moving {selectedAssetIds.length} item{selectedAssetIds.length !== 1 ? 's' : ''}
+            {t('uiMessages.movingItems', { count: selectedAssetIds.length })}
           </p>
           <div className="atlas-asset-manager-move-collections">
             <div className="atlas-asset-manager-move-label">{t('am.move.target')}</div>

@@ -100,7 +100,7 @@ function TagSearchModalInner({
           <div>
             <h3>{t('am.tags.manage')}</h3>
             <span className="atlas-tag-search__subtitle">
-              {assets.length} asset{assets.length !== 1 ? 's' : ''} selected
+              {t('uiMessages.selectedAssets', { count: assets.length })}
             </span>
           </div>
           <CloseButton onClick={onClose} />
@@ -150,7 +150,7 @@ function TagSearchModalInner({
           {canCreate && (
             <div className="atlas-tag-search__create" onClick={handleCreate}>
               <Plus size={16} />
-              <span>Create &ldquo;{searchQuery.trim()}&rdquo;</span>
+              <span>{t('am.tagPicker.create', { name: searchQuery.trim() })}</span>
             </div>
           )}
 

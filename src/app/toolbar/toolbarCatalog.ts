@@ -1,3 +1,4 @@
+import { t } from '../i18n';
 // Type-only: that module imports SettingsService at runtime, which imports this catalog.
 import type { ExperimentalFeatureId } from '../experimental/experimentalFeatures';
 import type { MapHotkeyId } from '../keyboard/mapHotkeys';
@@ -24,52 +25,52 @@ export interface ToolbarControlDefinition {
 /** The main toolbar's controls in their default order. Never rename an id: stored layouts use them. */
 export const TOOLBAR_CONTROLS = [
   {
-    id: 'move', label: 'Move and select', hotkey: 'move', dmOnly: false, hideable: true,
-    description: 'Select and move tokens, or point at the map with the laser pointer.',
+    id: 'move', label: t('uiToolbar.toolbarCatalog_moveAndSelect'), hotkey: 'move', dmOnly: false, hideable: true,
+    description: t('uiToolbar.toolbarCatalog_selectAndMoveTokensOrPointAtTheMapWithTheLaserPointer'),
   },
   {
-    id: 'fog', label: 'Fog of war', hotkey: 'fog', dmOnly: true, hideable: true,
-    description: 'Hide parts of the map from your players and reveal them as they explore.',
+    id: 'fog', label: t('uiToolbar.toolbarCatalog_fogOfWar'), hotkey: 'fog', dmOnly: true, hideable: true,
+    description: t('uiToolbar.toolbarCatalog_hidePartsOfTheMapFromYourPlayersAndRevealThemAsTheyExplore'),
   },
   {
-    id: 'draw', label: 'Draw', hotkey: 'draw', dmOnly: true, hideable: true,
-    description: 'Draw lines and place icons on the map, and erase them again.',
+    id: 'draw', label: t('uiToolbar.toolbarCatalog_draw'), hotkey: 'draw', dmOnly: true, hideable: true,
+    description: t('uiToolbar.toolbarCatalog_drawLinesAndPlaceIconsOnTheMapAndEraseThemAgain'),
   },
   {
-    id: 'text', label: 'Text', hotkey: 'text', dmOnly: true, hideable: true,
-    description: 'Write labels and short notes straight onto the map.',
+    id: 'text', label: t('uiToolbar.toolbarCatalog_text'), hotkey: 'text', dmOnly: true, hideable: true,
+    description: t('uiToolbar.toolbarCatalog_writeLabelsAndShortNotesStraightOntoTheMap'),
   },
   {
-    id: 'measure', label: 'Measure', hotkey: 'measure', dmOnly: false, hideable: true,
-    description: "Measure a distance, or the reach of a circle or cone, in your grid's units.",
+    id: 'measure', label: t('uiToolbar.toolbarCatalog_measure'), hotkey: 'measure', dmOnly: false, hideable: true,
+    description: t('uiToolbar.toolbarCatalog_measureADistanceOrTheReachOfACircleOrConeInYourGridSUnits'),
   },
   {
-    id: 'wall', label: 'Lighting', hotkey: 'wall', dmOnly: true, hideable: true, experimental: 'dynamicLighting',
-    description: 'Draw walls and doors, place lights, and decide what each token can see.',
+    id: 'wall', label: t('uiToolbar.toolbarCatalog_lighting'), hotkey: 'wall', dmOnly: true, hideable: true, experimental: 'dynamicLighting',
+    description: t('uiToolbar.toolbarCatalog_drawWallsAndDoorsPlaceLightsAndDecideWhatEachTokenCanSee'),
   },
   {
-    id: 'pin', label: 'Note pin', hotkey: 'pin', dmOnly: true, hideable: true,
-    description: 'Pin a note or a link to another scene onto a spot on the map.',
+    id: 'pin', label: t('uiToolbar.toolbarCatalog_notePin'), hotkey: 'pin', dmOnly: true, hideable: true,
+    description: t('uiToolbar.toolbarCatalog_pinANoteOrALinkToAnotherSceneOntoASpotOnTheMap'),
   },
   {
-    id: 'audio', label: 'Ambient sound', hotkey: 'audio', dmOnly: true, hideable: true, enabled: AMBIENT_AUDIO_ENABLED,
-    description: 'Place sounds on the map that grow louder as tokens come near.',
+    id: 'audio', label: t('uiToolbar.toolbarCatalog_ambientSound'), hotkey: 'audio', dmOnly: true, hideable: true, enabled: AMBIENT_AUDIO_ENABLED,
+    description: t('uiToolbar.toolbarCatalog_placeSoundsOnTheMapThatGrowLouderAsTokensComeNear'),
   },
   {
-    id: 'dice', label: 'Dice', hotkey: 'diceTray', dmOnly: false, hideable: true,
-    description: 'Roll any mix of dice and show the result to everyone at the table.',
+    id: 'dice', label: t('uiToolbar.toolbarCatalog_dice'), hotkey: 'diceTray', dmOnly: false, hideable: true,
+    description: t('uiToolbar.toolbarCatalog_rollAnyMixOfDiceAndShowTheResultToEveryoneAtTheTable'),
   },
   {
-    id: 'loot', label: 'Random tables', hotkey: 'lootRoller', dmOnly: true, hideable: true,
-    description: 'Roll on the random tables in your notes and loot bases.',
+    id: 'loot', label: t('uiToolbar.toolbarCatalog_randomTables'), hotkey: 'lootRoller', dmOnly: true, hideable: true,
+    description: t('uiToolbar.toolbarCatalog_rollOnTheRandomTablesInYourNotesAndLootBases'),
   },
   {
-    id: 'assets', label: 'Asset manager', hotkey: 'assets', dmOnly: true, hideable: true,
-    description: 'Find and place your maps, tokens, scenes and encounters.',
+    id: 'assets', label: t('uiToolbar.toolbarCatalog_assetManager'), hotkey: 'assets', dmOnly: true, hideable: true,
+    description: t('uiToolbar.toolbarCatalog_findAndPlaceYourMapsTokensScenesAndEncounters'),
   },
   {
-    id: 'palette', label: 'Command palette', hotkey: 'palette', dmOnly: true, hideable: false,
-    description: 'Find any Atlas command or setting by typing its name.',
+    id: 'palette', label: t('uiToolbar.toolbarCatalog_commandPalette'), hotkey: 'palette', dmOnly: true, hideable: false,
+    description: t('uiToolbar.toolbarCatalog_findAnyAtlasCommandOrSettingByTypingItsName'),
   },
 ] as const satisfies readonly ToolbarControlDefinition[];
 
@@ -81,8 +82,8 @@ export type ToolbarControlId = (typeof TOOLBAR_CONTROLS)[number]['id'];
  * main bar's order. Never rename its id: stored layouts use it.
  */
 export const UNDO_BAR = {
-  id: 'undo', label: 'Undo and redo', hotkey: 'undo', dmOnly: true, hideable: true,
-  description: 'Step back through your changes on the map, or forward again.',
+  id: 'undo', label: t('uiToolbar.toolbarCatalog_undoAndRedo'), hotkey: 'undo', dmOnly: true, hideable: true,
+  description: t('uiToolbar.toolbarCatalog_stepBackThroughYourChangesOnTheMapOrForwardAgain'),
 } as const satisfies ToolbarControlDefinition;
 
 export const UNDO_BAR_ID = UNDO_BAR.id;

@@ -1,3 +1,4 @@
+import { t } from '../../i18n';
 import { MessagesSquare } from 'lucide-react';
 import { useId, type ReactElement } from 'react';
 import { LabelTooltip } from '../../packages/components/primitives/tooltip';
@@ -13,11 +14,11 @@ export function LogUnreadTab({ count, onOpen }: { readonly count: number; readon
   const name = useId();
   return (
     <div className="atlas-vtt-plugin atlas-online-log-tab">
-      <LabelTooltip label="Open the table log" side="right" describe>
+      <LabelTooltip label={t('uiOnline.logUnreadTab_openTheTableLog')} side="right" describe>
         <button type="button" className="atlas-online-log-tab__button" aria-labelledby={name} onClick={onOpen}>
           <MessagesSquare />
           <span className="atlas-online-log-tab__count" aria-hidden="true">{count > MOST ? `${MOST}+` : count}</span>
-          <span id={name} className="atlas-online-log__sr">{`Table log, ${count} new`}</span>
+          <span id={name} className="atlas-online-log__sr">{t('uiOnlineDetails.logUnreadTab_tableLogCountNew', { count: count })}</span>
         </button>
       </LabelTooltip>
     </div>

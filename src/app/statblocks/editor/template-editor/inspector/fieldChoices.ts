@@ -1,3 +1,4 @@
+import { t } from '../../../../i18n';
 /**
  * What the inspector's field picker offers (§7.4), as pure functions: this
  * template's fields, the keys the collection's statblocks use that the
@@ -76,8 +77,8 @@ export function fieldChoiceGroups(
     ? [{ kind: 'new', key: newFieldKey(template, typed, collectionKeys), label: typed }]
     : [];
   const groups: FieldChoiceGroup[] = [
-    { id: 'template', label: 'This template', choices: own },
-    { id: 'collection', label: 'Used in this collection', choices: used },
+    { id: 'template', label: t('uiTemplateEditor.fieldChoices_thisTemplate'), choices: own },
+    { id: 'collection', label: t('uiTemplateEditor.fieldChoices_usedInThisCollection'), choices: used },
     { id: 'new', label: null, choices: fresh },
   ];
   return groups.filter((group) => group.choices.length > 0);

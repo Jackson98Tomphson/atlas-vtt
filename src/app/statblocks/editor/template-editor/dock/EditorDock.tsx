@@ -1,3 +1,4 @@
+import { t } from '../../../../i18n';
 import React from 'react';
 import { Redo2, Undo2 } from 'lucide-react';
 import { ToolButton } from '../../../../packages/components/primitives/ToolButton';
@@ -37,13 +38,13 @@ function AddButton({ item, onAdd }: { item: InsertItem; onAdd: EditorDockProps['
  */
 export function EditorDock({ onAdd, canUndo, canRedo, onUndo, onRedo }: EditorDockProps): React.JSX.Element {
   return (
-    <div className="atlas-te-dock" role="toolbar" aria-orientation="vertical" aria-label="Add to the template" data-te-region="dock">
+    <div className="atlas-te-dock" role="toolbar" aria-orientation="vertical" aria-label={t('uiTemplateEditor.editorDock_addToTheTemplate')} data-te-region="dock">
       {insertItems().map((item) => <AddButton key={itemKey(item)} item={item} onAdd={onAdd} />)}
       <span className="atlas-te-dock__divider" aria-hidden="true" />
       <span className="atlas-te-dock__history" {...{ [UNDOES_PLACEMENT]: '' }}>
-        <ToolButton icon={Undo2} label="Undo" shortcut={shortcutText(['Mod'], 'Z')} isActive={false} disabled={!canUndo} onClick={onUndo} tooltipSide="left" />
+        <ToolButton icon={Undo2} label={t('uiTemplateEditor.editorDock_undo')} shortcut={shortcutText(['Mod'], 'Z')} isActive={false} disabled={!canUndo} onClick={onUndo} tooltipSide="left" />
       </span>
-      <ToolButton icon={Redo2} label="Redo" shortcut={shortcutText(['Mod', 'Shift'], 'Z')} isActive={false} disabled={!canRedo} onClick={onRedo} tooltipSide="left" />
+      <ToolButton icon={Redo2} label={t('uiTemplateEditor.editorDock_redo')} shortcut={shortcutText(['Mod', 'Shift'], 'Z')} isActive={false} disabled={!canRedo} onClick={onRedo} tooltipSide="left" />
     </div>
   );
 }

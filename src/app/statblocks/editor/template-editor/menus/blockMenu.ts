@@ -1,3 +1,4 @@
+import { t } from '../../../../i18n';
 /**
  * A tile's menu in the template editor (spec §5.2): the same rows by
  * right-click, its handle, the toolbar's More and Shift+F10. Options and
@@ -60,14 +61,14 @@ function partRows(ctx: BlockMenuContext, block: TemplateBlock): SurfaceAction[] 
     id: `${noun}-${index}`,
     label: name,
     children: [
-      item(`rename-${noun}-${index}`, 'Rename', () => run.rename(index), { icon: 'pencil', disabled: !editable }),
+      item(`rename-${noun}-${index}`, t('uiTemplateDetails.blockMenu_rename'), () => run.rename(index), { icon: 'pencil', disabled: !editable }),
       SEPARATOR,
-      item(`remove-${noun}-${index}`, 'Remove', () => run.remove(index), { icon: 'x', destructive: true, disabled: !editable || last === 0 }),
+      item(`remove-${noun}-${index}`, t('uiTemplateDetails.blockMenu_remove'), () => run.remove(index), { icon: 'x', destructive: true, disabled: !editable || last === 0 }),
     ],
   }));
   return [
     item(`add-${noun}`, `Add ${noun}`, run.add, { icon: 'plus', disabled: !editable || !parts.canAdd }),
-    { kind: 'submenu', id: `${noun}s`, label: 'Numbers', icon: 'list', children: rows },
+    { kind: 'submenu', id: `${noun}s`, label: t('uiTemplateEditor.blockMenu_numbers'), icon: 'list', children: rows },
   ];
 }
 
@@ -75,11 +76,11 @@ function partRows(ctx: BlockMenuContext, block: TemplateBlock): SurfaceAction[] 
 function headerPartMenu(ctx: BlockMenuContext, part: HeaderPart): SurfaceAction[] {
   const { editable } = ctx;
   return tidy([
-    ...(editable ? [item('rename', 'Rename', () => ctx.run('edit-label'), { icon: 'pencil', hint: '⏎' })] : []),
-    item('copy-key', 'Copy property name', () => ctx.copyText(part.key), { icon: 'tag' }),
+    ...(editable ? [item('rename', t('uiTemplateDetails.blockMenu_rename'), () => ctx.run('edit-label'), { icon: 'pencil', hint: '⏎' })] : []),
+    item('copy-key', t('uiTemplateDetails.blockMenu_copyPropertyName'), () => ctx.copyText(part.key), { icon: 'tag' }),
     SEPARATOR,
     ...(part.hideable
-      ? [item('toggle-hidden', part.hidden ? 'Show on card' : 'Hide from card', () => ctx.run('toggle-hidden'), {
+      ? [item('toggle-hidden', part.hidden ? t('uiTemplateDetails.blockMenu_showOnCard') : t('uiTemplateDetails.blockMenu_hideFromCard'), () => ctx.run('toggle-hidden'), {
         icon: part.hidden ? 'eye' : 'eye-off', disabled: !editable,
       })]
       : []),
@@ -103,22 +104,22 @@ export function blockMenu(ctx: BlockMenuContext): SurfaceAction[] {
   const renamable = labelTargetOf(block, template.fields) !== null;
   return tidy([
     ...(ctx.openOptions && !many ? [item('options', 'Options…', ctx.openOptions, { icon: 'settings-2', hint: shortcutText(['Shift'], '⏎') })] : []),
-    ...(editable && !many && renamable ? [item('rename', 'Rename', () => ctx.run('edit-label'), { icon: 'pencil', hint: '⏎' })] : []),
+    ...(editable && !many && renamable ? [item('rename', t('uiTemplateDetails.blockMenu_rename'), () => ctx.run('edit-label'), { icon: 'pencil', hint: '⏎' })] : []),
     SEPARATOR,
     ...parts,
     SEPARATOR,
-    item('add-above', 'Add above…', () => ctx.openInsert({ at: gridInsertAbove(template.layout, block.id) }), { icon: 'plus', disabled: !editable }),
-    item('add-below', 'Add below…', () => ctx.openInsert({ after: last }), { icon: 'plus', hint: '/', disabled: !editable }),
-    item('move-up', 'Move up', () => ctx.run('move-up'), { icon: 'arrow-up', hint: shortcutText(['Alt'], '↑'), disabled: !editable || found.index === 0 }),
-    item('move-down', 'Move down', () => ctx.run('move-down'), {
+    item('add-above', t('uiTemplateDetails.blockMenu_addAbove'), () => ctx.openInsert({ at: gridInsertAbove(template.layout, block.id) }), { icon: 'plus', disabled: !editable }),
+    item('add-below', t('uiTemplateDetails.blockMenu_addBelow'), () => ctx.openInsert({ after: last }), { icon: 'plus', hint: '/', disabled: !editable }),
+    item('move-up', t('uiTemplateDetails.blockMenu_moveUp'), () => ctx.run('move-up'), { icon: 'arrow-up', hint: shortcutText(['Alt'], '↑'), disabled: !editable || found.index === 0 }),
+    item('move-down', t('uiTemplateDetails.blockMenu_moveDown'), () => ctx.run('move-down'), {
       icon: 'arrow-down', hint: shortcutText(['Alt'], '↓'), disabled: !editable || found.index === siblings.length - 1,
     }),
     SEPARATOR,
-    item('duplicate', 'Duplicate', () => ctx.run('duplicate'), { icon: 'copy-plus', hint: shortcutText(['Mod'], 'D'), disabled: !editable }),
-    item('copy', 'Copy', () => ctx.run('copy'), { icon: 'copy', hint: shortcutText(['Mod'], 'C') }),
-    ...(ctx.canPaste ? [item('paste', 'Paste below', () => ctx.run('paste'), { icon: 'clipboard-paste', hint: shortcutText(['Mod'], 'V'), disabled: !editable })] : []),
-    ...(key && !many ? [item('copy-key', 'Copy property name', () => ctx.copyText(key), { icon: 'tag' })] : []),
+    item('duplicate', t('uiTemplateDetails.blockMenu_duplicate'), () => ctx.run('duplicate'), { icon: 'copy-plus', hint: shortcutText(['Mod'], 'D'), disabled: !editable }),
+    item('copy', t('uiTemplateDetails.blockMenu_copy'), () => ctx.run('copy'), { icon: 'copy', hint: shortcutText(['Mod'], 'C') }),
+    ...(ctx.canPaste ? [item('paste', t('uiTemplateDetails.blockMenu_pasteBelow'), () => ctx.run('paste'), { icon: 'clipboard-paste', hint: shortcutText(['Mod'], 'V'), disabled: !editable })] : []),
+    ...(key && !many ? [item('copy-key', t('uiTemplateDetails.blockMenu_copyPropertyName'), () => ctx.copyText(key), { icon: 'tag' })] : []),
     SEPARATOR,
-    item('delete', many ? `Delete ${what}` : 'Delete', () => ctx.run('delete'), { icon: 'trash-2', hint: 'Del', destructive: true, disabled: !editable }),
+    item('delete', many ? `Delete ${what}` : 'Delete', () => ctx.run('delete'), { icon: 'trash-2', hint: t('uiMessages.deleteKey'), destructive: true, disabled: !editable }),
   ]);
 }

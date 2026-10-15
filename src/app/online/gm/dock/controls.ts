@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import { setIcon } from 'obsidian';
 import { openMenuBelow, type MenuEntry } from './dockMenu.ts';
 import type { Tone } from './panelModel.ts';
@@ -70,7 +71,7 @@ export interface QrToggle {
 }
 
 /** The name of the control that shows the invite link as a code to scan. */
-const QR_LABEL = 'QR code';
+const QR_LABEL = t('uiOnlineDetails.controls_qRCode');
 
 /**
  * "Copy invite link": the link itself is never shown. At the row's end a ghost button opens the link
@@ -79,7 +80,7 @@ const QR_LABEL = 'QR code';
  */
 export function inviteRow(parent: HTMLElement, copy: () => Promise<boolean>, qr: QrToggle): HTMLElement {
   const row = parent.createDiv({ cls: 'atlas-online-invite-row' });
-  copyRow(row, { icon: 'link', text: 'Copy invite link', copied: 'Link copied', focusKey: 'copy' }, copy);
+  copyRow(row, { icon: 'link', text: t('uiOnline.controls_copyInviteLink'), copied: t('uiOnlineDetails.controls_linkCopied'), focusKey: 'copy' }, copy);
   const button = row.createEl('button', { cls: ['atlas-online-icon-button', 'atlas-online-invite__qr', ...(qr.open ? ['is-open'] : [])], attr: { type: 'button', 'aria-label': QR_LABEL, 'aria-expanded': String(qr.open), 'data-focus-key': 'qr' } });
   setIcon(button, 'qr-code');
   button.addEventListener('click', () => qr.toggle());
@@ -93,11 +94,11 @@ export function surfaceHeader(layer: HTMLElement, title: string, status: { reado
   const line = header.createDiv({ cls: `atlas-online-header__status atlas-online-tone--${status.tone}` });
   line.createSpan({ cls: 'atlas-online-status__dot', attr: { 'aria-hidden': 'true' } });
   line.createSpan({ cls: statusInWords === null ? 'atlas-online-sr-only' : 'atlas-online-status__text', text: statusInWords ?? status.text });
-  const more = header.createEl('button', { cls: 'atlas-online-icon-button atlas-online-header__more', attr: { type: 'button', 'aria-label': 'More', 'aria-haspopup': 'menu', 'data-focus-key': 'more' } });
+  const more = header.createEl('button', { cls: 'atlas-online-icon-button atlas-online-header__more', attr: { type: 'button', 'aria-label': t('uiOnlineDetails.controls_more'), 'aria-haspopup': 'menu', 'data-focus-key': 'more' } });
   setIcon(more, 'more-horizontal');
   more.addEventListener('click', () => openMenuBelow(entries, more));
   if (close !== null) {
-    const button = header.createEl('button', { cls: 'atlas-online-close', attr: { type: 'button', 'aria-label': 'Close', 'data-focus-key': 'close' } });
+    const button = header.createEl('button', { cls: 'atlas-online-close', attr: { type: 'button', 'aria-label': t('uiOnlineDetails.controls_close'), 'data-focus-key': 'close' } });
     setIcon(button, 'x');
     button.addEventListener('click', close);
   }

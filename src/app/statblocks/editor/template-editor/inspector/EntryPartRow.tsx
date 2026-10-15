@@ -1,3 +1,4 @@
+import { t } from '../../../../i18n';
 import React, { useId } from 'react';
 import { X } from 'lucide-react';
 import { Select } from '../../../../packages/components/primitives/Select';
@@ -9,8 +10,8 @@ import { SwitchSetting, TextSetting } from './InspectorControls';
 import { useGestureText } from './useGestureText';
 
 const EXTRA_TYPES: Array<{ value: EntryExtraType; label: string }> = [
-  { value: 'text', label: 'Text' }, { value: 'number', label: 'Number' }, { value: 'dice', label: 'Dice' },
-  { value: 'list', label: 'List' }, { value: 'choice', label: 'One of a list' },
+  { value: 'text', label: t('uiTemplateEditor.entryPartRow_text') }, { value: 'number', label: t('uiTemplateEditor.entryPartRow_number') }, { value: 'dice', label: t('uiTemplateEditor.entryPartRow_dice') },
+  { value: 'list', label: t('uiTemplateEditor.entryPartRow_list') }, { value: 'choice', label: t('uiTemplateEditor.entryPartRow_oneOfAList') },
 ];
 
 /** The part as another type: what only a choice has goes when it is no choice any more. */
@@ -53,17 +54,17 @@ export function EntryPartRow({ extra, index, session, disabled, onEdit, onRemove
     <div className="atlas-te-entry-part">
       <div className="atlas-te-setting__inline">
         <span id={labelId} hidden>{`Part ${index + 1}`}</span>
-        <span id={typeId} hidden>{`Type of ${extra.label}`}</span>
+        <span id={typeId} hidden>{t('uiTemplateDetails.entryPartRow_typeOfName', { name: extra.label })}</span>
         <input {...label} type="text" className="atlas-te-input" aria-labelledby={labelId} disabled={disabled} spellCheck={false} />
         <Select<EntryExtraType> value={extra.type} options={EXTRA_TYPES} onChange={(type) => onEdit((current) => retyped(current, type))} labelledBy={typeId} disabled={disabled} />
-        <ToolButton icon={X} label="Remove" isActive={false} disabled={disabled} onClick={onRemove} />
+        <ToolButton icon={X} label={t('uiTemplateEditor.entryPartRow_remove')} isActive={false} disabled={disabled} onClick={onRemove} />
       </div>
       {extra.type === 'choice' && (
         <div className="atlas-te-entry-part__choice">
           <TextSetting
-            label="Choices"
+            label={t('uiTemplateEditor.entryPartRow_choices')}
             value={textFromList(extra.options)}
-            placeholder="Main action, Reaction, Passive"
+            placeholder={t('uiTemplateEditor.entryPartRow_mainActionReactionPassive')}
             session={session}
             disabled={disabled}
             onText={(text) => {
@@ -72,7 +73,7 @@ export function EntryPartRow({ extra, index, session, disabled, onEdit, onRemove
             }}
           />
           <SwitchSetting
-            label="Pick several"
+            label={t('uiTemplateEditor.entryPartRow_pickSeveral')}
             value={extra.several === true}
             disabled={disabled}
             onChange={(several) => onEdit((current) => withSeveral(current, several))}

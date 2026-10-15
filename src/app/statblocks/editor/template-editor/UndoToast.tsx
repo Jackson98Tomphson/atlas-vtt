@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React, { useEffect, useRef } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Button } from '../../../packages/components/primitives/button';
@@ -46,7 +47,7 @@ export function UndoToast({ text, onUndo, onDismiss }: UndoToastProps): React.JS
       onPointerLeave={() => { held.current = false; }}
     >
       <span className="atlas-te-toast__text">{text}</span>
-      <Button type="button" variant="ghost" size="sm" onClick={() => { onUndo(); onDismiss(); }}>Undo</Button>
+      <Button type="button" variant="ghost" size="sm" onClick={() => { onUndo(); onDismiss(); }}>{t('uiTemplateEditor.undoToast_undo')}</Button>
     </motion.div>
   );
 }

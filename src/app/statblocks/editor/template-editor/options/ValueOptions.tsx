@@ -1,3 +1,4 @@
+import { t } from '../../../../i18n';
 import React from 'react';
 import { updateField, type FieldChanges } from '../../../model/fieldOps';
 import type { StatBlock, TagsBlock, TemplateBlock } from '../../../model/templateTypes';
@@ -12,8 +13,8 @@ type Display = 'plain' | 'signed';
 
 /** How a Value of words lists them. */
 const TAG_LOOK_OPTIONS: ReadonlyArray<{ value: TagsBlock['look']; label: string }> = [
-  { value: 'comma', label: 'Comma list' }, { value: 'chips', label: 'Chips' },
-  { value: 'bullets', label: 'Bullets' }, { value: 'numbered', label: 'Numbered' },
+  { value: 'comma', label: t('uiTemplateEditor.valueOptions_commaList') }, { value: 'chips', label: t('uiTemplateEditor.valueOptions_chips') },
+  { value: 'bullets', label: t('uiTemplateEditor.valueOptions_bullets') }, { value: 'numbered', label: t('uiTemplateEditor.valueOptions_numbered') },
 ];
 
 const DISPLAYS = [{ value: 'plain' as const, label: '3' }, { value: 'signed' as const, label: '+3' }];
@@ -33,12 +34,12 @@ export function ValueOptions({ block, session, readOnly }: ValueOptionsProps): R
   const { snapshot } = useTemplateEditor();
   const field = boundFieldOf(snapshot.template, block);
   const kind = valueKindOf(block, field);
-  if (!field || !kind) return <SettingNote>Name the value first: click its label on the card.</SettingNote>;
+  if (!field || !kind) return <SettingNote>{t('uiTemplateEditor.valueOptions_nameTheValueFirstClickItsLabelOnTheCard')}</SettingNote>;
   const edit = (changes: FieldChanges): void => session.apply((template) => updateField(template, field.key, changes));
   return (
     <>
       <SelectSetting<ValueKind>
-        label="Kind"
+        label={t('uiTemplateEditor.valueOptions_kind')}
         value={kind}
         options={VALUE_KINDS.map((entry) => ({ value: entry.kind, label: entry.label }))}
         onChange={(next) => session.apply((template) => withValueKind(template, block.id, next))}
@@ -46,20 +47,20 @@ export function ValueOptions({ block, session, readOnly }: ValueOptionsProps): R
       />
       {kind === 'choice' && <ChoiceSettings field={field} session={session} readOnly={readOnly} edit={edit} />}
       {kind === 'number' && (
-        <TextSetting label="Unit" value={field.unit ?? ''} placeholder="ft." session={session} disabled={readOnly}
+        <TextSetting label={t('uiTemplateEditor.valueOptions_unit')} value={field.unit ?? ''} placeholder="ft." session={session} disabled={readOnly}
           onText={(text) => editField(session, field.key, { unit: text.trim() ? text : undefined })} />
       )}
       {(kind === 'number' || kind === 'pairs') && (block.type === 'stat' || block.type === 'pairs') && (
-        <ChoiceSetting<Display> label="Numbers" value={block.display ?? 'plain'} options={DISPLAYS} disabled={readOnly}
+        <ChoiceSetting<Display> label={t('uiTemplateEditor.valueOptions_numbers')} value={block.display ?? 'plain'} options={DISPLAYS} disabled={readOnly}
           onChange={(display) => editBlock(session, block.id, block.type, { display: display === 'plain' ? undefined : display })} />
       )}
       {block.type === 'stat' && (
-        <ChoiceSetting<StatBlock['look']> label="Label" value={block.look} disabled={readOnly}
-          options={[{ value: 'run-in', label: 'Beside' }, { value: 'stacked', label: 'Above' }]}
+        <ChoiceSetting<StatBlock['look']> label={t('uiTemplateEditor.valueOptions_label')} value={block.look} disabled={readOnly}
+          options={[{ value: 'run-in', label: t('uiTemplateEditor.valueOptions_beside') }, { value: 'stacked', label: t('uiTemplateEditor.valueOptions_above') }]}
           onChange={(look) => editBlock(session, block.id, 'stat', { look })} />
       )}
       {block.type === 'tags' && (
-        <SelectSetting label="Style" value={block.look} disabled={readOnly} options={[...TAG_LOOK_OPTIONS]}
+        <SelectSetting label={t('uiTemplateEditor.valueOptions_style')} value={block.look} disabled={readOnly} options={[...TAG_LOOK_OPTIONS]}
           onChange={(look) => editBlock(session, block.id, 'tags', { look })} />
       )}
     </>

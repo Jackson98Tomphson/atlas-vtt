@@ -1,3 +1,4 @@
+import { t } from '../../../../i18n';
 import React, { useEffect, useState } from 'react';
 import { ConflictBar } from '../ConflictBar';
 import { EditorBar } from '../EditorBar';
@@ -36,9 +37,9 @@ export function TemplateStateBars({ session, snapshot }: TemplateStateBarsProps)
     <>
       <ConflictBar session={session} snapshot={snapshot} />
       {snapshot.saveState === 'error' && !snapshot.readOnly && (
-        <EditorBar tone="warning" text={snapshot.saveProblem ?? 'Couldn\'t save.'} />
+        <EditorBar tone="warning" text={snapshot.saveProblem ?? t('uiTemplateDetails.templateStateBars_couldnTSave')} />
       )}
-      {saving && <p className="atlas-te-saving" role="status">Saving…</p>}
+      {saving && <p className="atlas-te-saving" role="status">{t('uiTemplateEditor.templateStateBars_saving')}</p>}
     </>
   );
 }

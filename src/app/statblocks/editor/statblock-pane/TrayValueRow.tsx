@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React, { useEffect, useRef, useState } from 'react';
 import { Button } from '../../../packages/components/primitives/button';
 import type { FieldValue, TemplateField } from '../../model/templateTypes';
@@ -87,7 +88,7 @@ export function TrayValueRow({ field }: TrayValueRowProps): React.JSX.Element {
               pane.announce(removedMessage(field.key, 'Removed'));
             }}
           >
-            Remove from note
+            {t('uiStatblocks.trayValueRow_removeFromNote')}
           </Button>
         )}
       </span>

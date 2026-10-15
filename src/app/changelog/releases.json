@@ -2,6 +2,11 @@
   "version": "0.8.1-beta.0",
   "releases": [
     {
+      "version": "0.8.1-beta.0",
+      "title": "Coming in 0.8.1",
+      "markdown": "## New\n\n- Atlas now follows Obsidian's Italian interface language, including its in-app tutorials, settings, menus and tooltips."
+    },
+    {
       "version": "0.8.0",
       "date": "2026-10-14",
       "title": "Online play and native statblocks",

@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React from 'react';
 import { GripHorizontal, GripVertical, Plus } from 'lucide-react';
 import { LabelTooltip } from '../../../packages/components/primitives/tooltip';
@@ -48,15 +49,15 @@ export function TableAddButtons({ rows, columns, onAddRow, onAddColumn }: AddBut
   return (
     <>
       {rows && (
-        <LabelTooltip label="Add row below">
-          <button {...chromeButtonProps()} className="atlas-sb-sheet-table__add atlas-sb-sheet-table__add--row" aria-label="Add row below" onClick={onAddRow}>
+        <LabelTooltip label={t('uiStatblocks.tableChrome_addRowBelow')}>
+          <button {...chromeButtonProps()} className="atlas-sb-sheet-table__add atlas-sb-sheet-table__add--row" aria-label={t('uiStatblocks.tableChrome_addRowBelow')} onClick={onAddRow}>
             <Plus aria-hidden="true" />
           </button>
         </LabelTooltip>
       )}
       {columns && (
-        <LabelTooltip label="Add column to the right">
-          <button {...chromeButtonProps()} className="atlas-sb-sheet-table__add atlas-sb-sheet-table__add--column" aria-label="Add column to the right" onClick={onAddColumn}>
+        <LabelTooltip label={t('uiStatblocks.tableChrome_addColumnToTheRight')}>
+          <button {...chromeButtonProps()} className="atlas-sb-sheet-table__add atlas-sb-sheet-table__add--column" aria-label={t('uiStatblocks.tableChrome_addColumnToTheRight')} onClick={onAddColumn}>
             <Plus aria-hidden="true" />
           </button>
         </LabelTooltip>

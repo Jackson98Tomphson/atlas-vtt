@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React, { useRef } from 'react';
 import { Button } from '../../../packages/components/primitives/button';
 import type { GallerySource, GallerySourceId } from './gallerySources';
@@ -27,7 +28,7 @@ export function GallerySourceNav({ sources, value, panelId, onChange }: GalleryS
   };
 
   return (
-    <nav className="atlas-te-gallery__sources" role="tablist" aria-orientation="vertical" aria-label="Sources">
+    <nav className="atlas-te-gallery__sources" role="tablist" aria-orientation="vertical" aria-label={t('uiStatblocks.gallerySourceNav_sources')}>
       {sources.map((source, index) => (
         <Button
           key={source.id}

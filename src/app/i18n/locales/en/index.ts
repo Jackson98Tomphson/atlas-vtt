@@ -1,3 +1,17 @@
+import { uiMessages } from './uiMessages';
+import { uiTemplateDetails } from './uiTemplateDetails';
+import { uiStatblockDetails } from './uiStatblockDetails';
+import { uiSettingsDetails } from './uiSettingsDetails';
+import { uiOnlineDetails } from './uiOnlineDetails';
+import { uiGeneralDetails } from './uiGeneralDetails';
+import { uiTemplateEditor } from './uiTemplateEditor';
+import { uiStatblocks } from './uiStatblocks';
+import { uiSettings } from './uiSettings';
+import { uiToolbar } from './uiToolbar';
+import { uiAssets } from './uiAssets';
+import { uiOnline } from './uiOnline';
+import { uiLighting } from './uiLighting';
+import { uiGeneral } from './uiGeneral';
 import { align } from './align';
 import { atlasLinks } from './atlasLinks';
 import { am } from './am';
@@ -87,6 +101,20 @@ import { vision } from './vision';
 
 /** English, the source language: every key exists here, and other languages translate a subset of it. */
 export const en = {
+  ...uiMessages,
+  ...uiTemplateDetails,
+  ...uiStatblockDetails,
+  ...uiSettingsDetails,
+  ...uiOnlineDetails,
+  ...uiGeneralDetails,
+  ...uiTemplateEditor,
+  ...uiStatblocks,
+  ...uiSettings,
+  ...uiToolbar,
+  ...uiAssets,
+  ...uiOnline,
+  ...uiLighting,
+  ...uiGeneral,
   ...align,
   ...atlasLinks,
   ...am,

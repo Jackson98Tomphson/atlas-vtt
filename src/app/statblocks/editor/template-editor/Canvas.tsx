@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React, { useEffect, useMemo } from 'react';
 import type { App } from 'obsidian';
 import { MOTION_EASE_OUT, MOTION_NORMAL_MS, prefersReducedMotion } from '../../../utils/motion';
@@ -157,7 +158,7 @@ export function Canvas(props: CanvasProps): React.JSX.Element {
       data-te-region="canvas"
       tabIndex={primary ? -1 : 0}
       role="group"
-      aria-label="Template canvas"
+      aria-label={t('uiTemplateEditor.canvas_templateCanvas')}
       onClickCapture={onClickCapture}
       onDoubleClickCapture={onDoubleClickCapture}
       onFocus={onFocus}

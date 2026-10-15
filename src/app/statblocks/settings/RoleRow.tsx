@@ -1,3 +1,4 @@
+import { t } from '../../i18n';
 import React, { useId } from 'react';
 import type { App } from 'obsidian';
 import { AlertTriangle, Trash2 } from 'lucide-react';
@@ -39,7 +40,7 @@ export function RoleRow({
   onChange, onFolderChange, onRemove, onEdit, editBlocked,
 }: RoleRowProps): React.JSX.Element {
   const templateLabel = useId();
-  const name = role.name.trim() || 'this role';
+  const name = role.name.trim() || t('uiStatblockDetails.roleRow_thisRole');
 
   return (
     <div className="atlas-csm-condition atlas-sb-role">
@@ -47,15 +48,15 @@ export function RoleRow({
         <input
           type="text"
           className="atlas-csm-input atlas-sb-role__name"
-          placeholder="Role name"
-          aria-label="Role name"
+          placeholder={t('uiStatblocks.roleRow_roleName')}
+          aria-label={t('uiStatblocks.roleRow_roleName')}
           aria-invalid={problem ? true : undefined}
           autoFocus={autoFocus}
           value={role.name}
           onChange={(event) => onChange({ ...role, name: event.target.value })}
         />
         <div className="atlas-sb-role__template">
-          <span id={templateLabel} hidden>Template of {name}</span>
+          <span id={templateLabel} hidden>{t('uiMessages.templateOf', { name })}</span>
           <TemplatePicker
             value={role.templateId}
             library={library}
@@ -65,7 +66,7 @@ export function RoleRow({
           />
         </div>
         {onEdit && (
-          <LabelTooltip label={editBlocked ?? 'Saves the settings and opens the template'} describe>
+          <LabelTooltip label={editBlocked ?? t('uiStatblockDetails.roleRow_savesTheSettingsAndOpensTheTemplate')} describe>
             <Button
               variant="ghost"
               size="sm"
@@ -74,11 +75,11 @@ export function RoleRow({
               // Not `disabled`: a disabled button shows no tooltip, and this one says why.
               onClick={editBlocked ? undefined : onEdit}
             >
-              Edit
+              {t('uiStatblocks.roleRow_edit')}
             </Button>
           </LabelTooltip>
         )}
-        <LabelTooltip label={removable ? 'Remove role' : 'A collection needs at least one role'}>
+        <LabelTooltip label={removable ? t('uiStatblockDetails.roleRow_removeRole') : t('uiStatblockDetails.roleRow_aCollectionNeedsAtLeastOneRole')}>
           <Button
             variant="ghost"
             size="icon"
@@ -91,13 +92,13 @@ export function RoleRow({
         </LabelTooltip>
       </div>
       <div className="atlas-csm-condition-row">
-        <FolderField app={app} value={folder} onChange={onFolderChange} label={`Folder for new statblocks of ${name}`} />
+        <FolderField app={app} value={folder} onChange={onFolderChange} label={t('uiStatblockDetails.roleRow_folderForNewStatblocksOfName', { name: name })} />
         {fallbackName !== null && (
-          <LabelTooltip label={`The role's template is not in this vault, so new statblocks start from the built-in ${fallbackName} template.`} describe multiline>
+          <LabelTooltip label={t('uiStatblockDetails.roleRow_theRoleSTemplateIsNotInThisVaultSoNewStatblocksStartFro', { name: fallbackName })} describe multiline>
             {/* Focusable, so the explanation also opens from the keyboard. */}
             <span className="atlas-sb-role__missing" role="note" tabIndex={0}>
               <AlertTriangle aria-hidden="true" />
-              Using {fallbackName} instead
+              {t('uiMessages.usingInstead', { name: fallbackName })}
             </span>
           </LabelTooltip>
         )}

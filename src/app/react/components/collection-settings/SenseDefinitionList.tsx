@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React, { useId, useState } from 'react';
 import { Pencil, Plus, Trash2 } from 'lucide-react';
 import { isBuiltInSense, newSense, senseProblem, senseSummary } from '../../../gameSystems/senseEditing';
@@ -31,9 +32,9 @@ export function SenseDefinitionList({ senses, unit, onChange, onDelete }: SenseD
 
   return (
     <section className="atlas-csm-senses">
-      <h4 id={headingId} className="atlas-csm-senses__title">Senses of this game system</h4>
+      <h4 id={headingId} className="atlas-csm-senses__title">{t('uiSettings.senseDefinitionList_sensesOfThisGameSystem')}</h4>
       <p className="atlas-csm-hint">
-        Tokens of this collection can have these senses. Add your own for a homebrew system.
+        {t('uiSettings.senseDefinitionList_tokensOfThisCollectionCanHaveTheseSensesAddYourOwnForAHomebrewSystem')}
       </p>
       <ul className="atlas-csm-sense-list" role="list" aria-labelledby={headingId}>
         {senses.map((sense) => {
@@ -81,7 +82,7 @@ export function SenseDefinitionList({ senses, unit, onChange, onDelete }: SenseD
       </ul>
       <Button variant="ghost" className="atlas-csm-add-btn" onClick={add}>
         <Plus />
-        Add a sense of your own
+        {t('uiSettings.senseDefinitionList_addASenseOfYourOwn')}
       </Button>
     </section>
   );

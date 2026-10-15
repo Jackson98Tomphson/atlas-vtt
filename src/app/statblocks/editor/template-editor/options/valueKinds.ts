@@ -1,3 +1,4 @@
+import { t } from '../../../../i18n';
 /**
  * The kinds a Value tile holds, as the toolbar's Kind of value and the tile's
  * Options offer them: one value (a number, text, dice, a rating or a choice
@@ -16,13 +17,13 @@ import type { FieldType, StatblockTemplate, TemplateBlock, TemplateField } from 
 export type ValueKind = 'number' | 'text' | 'dice' | 'rating' | 'choice' | 'words' | 'pairs';
 
 export const VALUE_KINDS: ReadonlyArray<{ kind: ValueKind; label: string }> = [
-  { kind: 'number', label: 'Number' },
-  { kind: 'text', label: 'Text' },
-  { kind: 'dice', label: 'Dice' },
-  { kind: 'rating', label: 'Rating' },
-  { kind: 'choice', label: 'One of a list' },
-  { kind: 'words', label: 'Words' },
-  { kind: 'pairs', label: 'Labels and values' },
+  { kind: 'number', label: t('uiTemplateEditor.valueKinds_number') },
+  { kind: 'text', label: t('uiTemplateEditor.valueKinds_text') },
+  { kind: 'dice', label: t('uiTemplateEditor.valueKinds_dice') },
+  { kind: 'rating', label: t('uiTemplateEditor.valueKinds_rating') },
+  { kind: 'choice', label: t('uiTemplateEditor.valueKinds_oneOfAList') },
+  { kind: 'words', label: t('uiTemplateEditor.valueKinds_words') },
+  { kind: 'pairs', label: t('uiTemplateEditor.valueKinds_labelsAndValues') },
 ];
 
 const FIELD_TYPES: Readonly<Record<ValueKind, FieldType>> = {

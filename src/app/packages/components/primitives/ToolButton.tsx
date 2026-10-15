@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React from "react"
 import { Button } from "./button"
 import { Tooltip, TooltipTrigger, TooltipContent } from "./tooltip"
@@ -86,7 +87,7 @@ export const ToolButton: React.FC<ToolButtonProps> = ({
           onClick={onChevronClick}
         >
           <ChevronDown />
-          <span className="sr-only">{label} Options</span>
+          <span className="sr-only">{label} {t('uiGeneral.toolButton_options')}</span>
         </Button>
       )}
 

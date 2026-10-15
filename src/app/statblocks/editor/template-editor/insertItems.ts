@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 /**
  * What the Add bar and the insert menu offer: the six kinds a statblock is
  * built from in the grid (a value, a metric of key numbers, a list of
@@ -20,12 +21,12 @@ export interface InsertItem {
 }
 
 const ITEMS: readonly InsertItem[] = [
-  { type: 'stat', label: 'Value', example: 'A label and its value: Speed 30', keywords: ['stat', 'number', 'property', 'words', 'tags', 'choice'] },
-  { type: 'metric', label: 'Metric', example: 'Key numbers in a box: Major 8 | Severe 15', keywords: ['numbers', 'thresholds', 'attributes', 'boxed', 'strip', 'stat'] },
-  { type: 'entries', label: 'Abilities', example: 'Names with text: actions, traits, spells', keywords: ['actions', 'traits', 'features', 'list', 'spells'] },
-  { type: 'scores', label: 'Table', example: 'Rows and columns, as a note\'s table', keywords: ['ability scores', 'scores', 'attributes', 'stats', 'columns', 'rows', 'grid'] },
-  { type: 'text', label: 'Text', example: 'A paragraph', keywords: ['description', 'notes', 'paragraph'] },
-  { type: 'divider', label: 'Divider', example: 'A line across', keywords: ['rule', 'separator'] },
+  { type: 'stat', label: t('uiTemplateEditor.insertItems_value'), example: t('uiMessages.insertValueExample'), keywords: ['stat', 'number', 'property', 'words', 'tags', 'choice'] },
+  { type: 'metric', label: t('uiTemplateEditor.insertItems_metric'), example: t('uiMessages.insertMetricExample'), keywords: ['numbers', 'thresholds', 'attributes', 'boxed', 'strip', 'stat'] },
+  { type: 'entries', label: t('uiTemplateEditor.insertItems_abilities'), example: t('uiMessages.insertAbilitiesExample'), keywords: ['actions', 'traits', 'features', 'list', 'spells'] },
+  { type: 'scores', label: t('uiTemplateEditor.insertItems_table'), example: t('uiMessages.insertTableExample'), keywords: ['ability scores', 'scores', 'attributes', 'stats', 'columns', 'rows', 'grid'] },
+  { type: 'text', label: t('uiTemplateEditor.insertItems_text'), example: t('uiMessages.insertTextExample'), keywords: ['description', 'notes', 'paragraph'] },
+  { type: 'divider', label: t('uiTemplateEditor.insertItems_divider'), example: t('uiMessages.insertDividerExample'), keywords: ['rule', 'separator'] },
 ];
 
 /** The item that puts a block of `type` in; a type the grid offers no kind for is offered as a Value. */

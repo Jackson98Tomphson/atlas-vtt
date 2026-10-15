@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { cn } from '../../../../utils/cn';
@@ -189,7 +190,7 @@ export function DiceRollPanel({ result, presentation, scene, compact: compactNow
         {!compact && (
           <CloseButton
             className="atlas-dice-roll__close"
-            aria-label="Hide roll"
+            aria-label={t('uiGeneral.diceRollPanel_hideRoll')}
             onClick={(e) => {
               e.stopPropagation();
               close();

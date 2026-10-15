@@ -1,3 +1,4 @@
+import { t } from '../../i18n';
 import React from 'react';
 import { Pencil } from 'lucide-react';
 import type { App } from 'obsidian';
@@ -31,7 +32,7 @@ export function FenceStatblock({ app, path, onEdit }: FenceStatblockProps): Reac
         <div className="atlas-vtt-plugin atlas-statblock-fence__bar">
           <Button type="button" variant="ghost" size="sm" onClick={() => onEdit(path)}>
             <Pencil aria-hidden />
-            Edit statblock
+            {t('uiStatblocks.fenceStatblock_editStatblock')}
           </Button>
         </div>
       )}

@@ -1,3 +1,4 @@
+import { t } from '../../i18n';
 import { GM_AUTHOR, type RollEntry } from '../protocol/index.ts';
 import { ChevronDown, CornerDownRight, EyeOff } from 'lucide-react';
 import { memo, useId, useState, type ReactElement } from 'react';
@@ -53,7 +54,7 @@ export const RollRow = memo(function RollRow({ entry, face, portrait, time, thre
   const roller = shownName(who, name, api.self);
   const ability = roll.source?.abilityName;
   // A roll answering a button in a whisper among players goes to that whisper's people, not to the GM.
-  const badge = mode === undefined ? null : mode === 'gm' && entry.to?.includes(GM_AUTHOR) === false ? 'Whisper' : ROLL_MODE_INFO[mode].badge;
+  const badge = mode === undefined ? null : mode === 'gm' && entry.to?.includes(GM_AUTHOR) === false ? t('uiOnlineDetails.rollRow_whisper') : ROLL_MODE_INFO[mode].badge;
   return (
     <RowShell id={id} className="atlas-online-log__row--roll" reactions={reactions} canEdit={false} canDelete={false} api={api} editing={false} {...flags}>
       <div className={classes('atlas-online-log__roll', critClass(roll, 'atlas-online-log__roll'), mode !== undefined && 'atlas-online-log__roll--private')}>
@@ -79,10 +80,10 @@ export const RollRow = memo(function RollRow({ entry, face, portrait, time, thre
           </div>
           <button type="button" className="atlas-online-log__roll-toggle" aria-expanded={open} aria-controls={dice} onClick={() => setOpen(!open)}>
             <ChevronDown className={classes('atlas-online-log__roll-chevron', open && 'is-open')} />
-            Dice
+            {t('uiOnline.rollRow_dice')}
           </button>
           {open && <RollDice id={dice} roll={roll} />}
-          {entry.hidden === true && <span className="atlas-online-log__roll-hidden"><EyeOff />Only you see this roll</span>}
+          {entry.hidden === true && <span className="atlas-online-log__roll-hidden"><EyeOff />{t('uiOnline.rollRow_onlyYouSeeThisRoll')}</span>}
         </div>
       </div>
       <ReactionChips id={id} reactions={reactions} api={api} />

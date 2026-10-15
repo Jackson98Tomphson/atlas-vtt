@@ -183,7 +183,7 @@ const TokenPickerContent: React.FC<TokenPickerModalProps> = ({
               onClick={() => { void handleRemoveToken(); }}
               className="token-picker-remove-btn"
             >
-              Unassign Token
+              {t('uiGeneral.tokenPickerModal_unassignToken')}
             </button>
           </LabelTooltip>
         )}

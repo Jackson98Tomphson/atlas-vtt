@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 /**
  * The glyphs and plain names the template editor's side panes show for
  * blocks, field types and meanings. The catalogue names its icons as lucide
@@ -23,9 +24,9 @@ export function blockGlyph(type: BlockType): LucideIcon {
 
 /** What a field holds, in the words the editor uses. */
 export const FIELD_TYPE_LABELS: Readonly<Record<FieldType, string>> = {
-  text: 'Text', markdown: 'Paragraphs', number: 'Number', rating: 'Rating', dice: 'Dice', choice: 'One of a list',
-  list: 'Words', scores: 'Table values', entries: 'Names and text', pairs: 'Labels and values', image: 'Picture',
-  spells: 'Groups with items',
+  text: t('uiTemplateEditor.editorGlyphs_text'), markdown: t('uiTemplateDetails.editorGlyphs_paragraphs'), number: t('uiTemplateDetails.editorGlyphs_number'), rating: t('uiTemplateDetails.editorGlyphs_rating'), dice: t('uiTemplateDetails.editorGlyphs_dice'), choice: t('uiTemplateDetails.editorGlyphs_oneOfAList'),
+  list: t('uiTemplateDetails.editorGlyphs_words'), scores: t('uiTemplateDetails.editorGlyphs_tableValues'), entries: t('uiTemplateDetails.editorGlyphs_namesAndText'), pairs: t('uiTemplateDetails.editorGlyphs_labelsAndValues'), image: t('uiTemplateDetails.editorGlyphs_picture'),
+  spells: t('uiTemplateDetails.editorGlyphs_groupsWithItems'),
 };
 
 const FIELD_TYPE_GLYPHS: Readonly<Record<FieldType, LucideIcon>> = {

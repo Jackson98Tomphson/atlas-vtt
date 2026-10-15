@@ -1,3 +1,4 @@
+import { t } from '../../i18n';
 import React, { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Folder } from 'lucide-react';
 import { normalizePath, type App, type TFolder } from 'obsidian';
@@ -115,7 +116,7 @@ export function FolderField({ app, value, onChange, label }: FolderFieldProps): 
         aria-expanded={showing}
         aria-controls={showing ? listId : undefined}
         aria-activedescendant={showing ? optionId(active) : undefined}
-        placeholder="Default location for new notes"
+        placeholder={t('uiStatblocks.folderField_defaultLocationForNewNotes')}
         spellCheck={false}
         value={value}
         onChange={(event) => type(event.target.value)}
@@ -125,7 +126,7 @@ export function FolderField({ app, value, onChange, label }: FolderFieldProps): 
       />
       {showing && (
         // Pressing a folder keeps the focus in the field, so it is picked before the field is left.
-        <div ref={listRef} id={listId} role="listbox" aria-label="Folders" className="atlas-sb-folder-field__list" onMouseDown={(event) => event.preventDefault()}>
+        <div ref={listRef} id={listId} role="listbox" aria-label={t('uiStatblocks.folderField_folders')} className="atlas-sb-folder-field__list" onMouseDown={(event) => event.preventDefault()}>
           {suggestions.map((path, index) => (
             <div
               key={path}

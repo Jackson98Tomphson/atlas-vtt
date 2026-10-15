@@ -169,7 +169,7 @@ function AudioConfigPanelInner({
         <div className="atlas-audio-config__section-label">{t('audio.range')}</div>
         <div className="atlas-audio-config__field">
           <label className="atlas-audio-config__label">
-            Inner Radius{unitLabel ? ` (${unitLabel})` : ''}
+            {t('uiGeneral.audioConfigPanel_innerRadius')}{unitLabel ? ` (${unitLabel})` : ''}
           </label>
           <div className="atlas-audio-config__slider-row">
             <input
@@ -193,7 +193,7 @@ function AudioConfigPanelInner({
 
         <div className="atlas-audio-config__field">
           <label className="atlas-audio-config__label">
-            Outer Radius{unitLabel ? ` (${unitLabel})` : ''}
+            {t('uiGeneral.audioConfigPanel_outerRadius')}{unitLabel ? ` (${unitLabel})` : ''}
           </label>
           <div className="atlas-audio-config__slider-row">
             <input
@@ -227,7 +227,7 @@ function AudioConfigPanelInner({
 
         {/* Delete */}
         <button className="atlas-audio-config__delete-btn" onClick={handleDelete}>
-          Delete Sound Source
+          {t('uiGeneral.audioConfigPanel_deleteSoundSource')}
         </button>
       </div>
     </div>

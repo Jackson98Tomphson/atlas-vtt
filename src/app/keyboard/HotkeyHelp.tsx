@@ -34,7 +34,7 @@ export function HotkeyHelp({ settings: explicit, onClose, isPlayerView = false }
             <div><dt>{t('hotkey.previewStatblock')}</dt><dd><kbd>Ctrl/Cmd</kbd> {t('hotkey.hover')}</dd></div>
             <div><dt>{t('hotkey.dragCopy')}</dt><dd><kbd>Alt/Option</kbd> {t('hotkey.drag')}</dd></div>
             <div><dt>{t('hotkey.openBoth')}</dt><dd><kbd>Shift + Enter</kbd></dd></div>
-            <div><dt>{t('hotkey.waypoint')}</dt><dd><kbd>Space</kbd> {t('hotkey.whileDragging')}</dd></div>
+            <div><dt>{t('hotkey.waypoint')}</dt><dd><kbd>{t('uiGeneral.hotkeyHelp_space')}</kbd> {t('hotkey.whileDragging')}</dd></div>
             <div><dt>{t('hotkey.closeDialog')}</dt><dd><kbd>Escape</kbd></dd></div>
             <div><dt>{t('hotkey.navigateMenus')}</dt><dd><kbd>Tab</kbd> / <kbd>{t('hotkey.arrowKeys')}</kbd></dd></div>
           </dl>

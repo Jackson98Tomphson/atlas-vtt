@@ -1,9 +1,9 @@
+import { t } from '../../../i18n';
 import React from 'react';
 import { noteName } from '../../../utils/pathUtils';
 import { BY_PATH } from '../../fs/fsLayoutNotes';
 import { statblockCount, type LayoutStatblocks } from '../../fs/fsLayoutStatblocks';
 import type { FsImportReport } from '../../fs/fsLayoutTypes';
-import { plural } from '../../../utils/plural';
 import { BatchProgress, Disclosure, LeftNoteRows, NoteRow } from '../batchParts';
 import {
   detailSentences, detailsLine, detailsToggleLabel, fsOnlyLine, leftoversLabel, moveExplanation, movedLine, placeLabel, readyLine,
@@ -58,13 +58,13 @@ export function AdoptionSection({ statblocks, phase }: { statblocks: LayoutStatb
       {phase.kind === 'ready' && (
         <>
           <p className="atlas-te-dialog__text">{moveExplanation(statblocks)}</p>
-          <Disclosure label={`Show the ${plural(total, 'statblock')}`}>
+          <Disclosure label={t('uiStatblockDetails.layoutImportParts_showTheCountStatblocks', { count: total })}>
             <StatblockRows statblocks={statblocks} />
           </Disclosure>
         </>
       )}
       {phase.kind === 'running' && (
-        <BatchProgress done={phase.done} total={phase.total} label="Moving statblocks" text={`Moving statblocks: ${phase.done} of ${phase.total}`} />
+        <BatchProgress done={phase.done} total={phase.total} label={t('uiStatblocks.layoutImportParts_movingStatblocks')} text={t('uiStatblockDetails.layoutImportParts_movingStatblocksDoneOfTotal', { done: phase.done, total: phase.total })} />
       )}
       {phase.kind === 'finished' && phase.result && (
         <>

@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React from 'react';
 import type { App } from 'obsidian';
 import { openContextMenuGlobal } from '../../../react/root/ContextMenuContext';
@@ -30,7 +31,7 @@ export function StatblockFeedMenu({ app, path, onOpened, children }: StatblockFe
 
   const edit = (): void => {
     if (!editInStatblockPane(app, path, { collectionId, from: 'map' })) {
-      runInBackground(app.workspace.openLinkText('', path, true), `Opening ${path}`, "Couldn't open the note");
+      runInBackground(app.workspace.openLinkText('', path, true), `Opening ${path}`, t('uiStatblockDetails.statblockFeedMenu_couldnTOpenTheNote'));
     }
     onOpened();
   };
@@ -38,7 +39,7 @@ export function StatblockFeedMenu({ app, path, onOpened, children }: StatblockFe
     // A link inside the statblock keeps its own menu.
     if (event.defaultPrevented) return;
     event.preventDefault();
-    openContextMenuGlobal([{ type: 'item', label: 'Edit statblock', icon: 'pencil', onClick: edit }], { x: event.clientX, y: event.clientY });
+    openContextMenuGlobal([{ type: 'item', label: t('uiStatblocks.statblockFeedMenu_editStatblock'), icon: 'pencil', onClick: edit }], { x: event.clientX, y: event.clientY });
   };
   return <div className="atlas-dm-statblock-menu" onContextMenu={onContextMenu}>{children}</div>;
 }

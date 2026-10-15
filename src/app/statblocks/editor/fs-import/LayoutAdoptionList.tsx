@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { type App } from 'obsidian';
@@ -13,7 +14,7 @@ import { LayoutImportDialog } from './LayoutImportDialog';
 import { useCollectionLayouts } from './useCollectionLayouts';
 import { importedAs } from './useLayoutsToMove';
 
-const NOT_IMPORTABLE = 'Turn on Fantasy Statblocks to import this layout';
+const NOT_IMPORTABLE = t('uiStatblockDetails.layoutAdoptionList_turnOnFantasyStatblocksToImportThisLayout');
 
 interface Adopting {
   group: LayoutGroup;
@@ -47,25 +48,25 @@ export function LayoutAdoptionList({ app, collectionId }: { app: App; collection
       .then((result) => setAdopting({ group, imported: result }))
       .catch((error: unknown) => {
         console.error('[Atlas] Importing a Fantasy Statblocks layout failed:', error);
-        showNotice("Couldn't import the layout.");
+        showNotice(t('uiStatblockDetails.layoutAdoptionList_couldnTImportTheLayout'));
       })
       .finally(() => setBusy(null));
   };
 
   return (
     <div ref={setRoot} className="atlas-csm-field atlas-sb-templates">
-      <span className="atlas-csm-label">Fantasy Statblocks layouts</span>
-      <p className="atlas-csm-hint">Statblocks of this collection drawn with a Fantasy Statblocks layout. Move them to Atlas to edit them with their layout&apos;s template.</p>
-      <ul className="atlas-sb-templates__list" aria-label="Fantasy Statblocks layouts">
+      <span className="atlas-csm-label">{t('uiStatblocks.layoutAdoptionList_fantasyStatblocksLayouts')}</span>
+      <p className="atlas-csm-hint">{t('uiStatblocks.layoutAdoptionList_statblocksOfThisCollectionDrawnWithAFantasyStatblocksLayoutMoveThemToA')}</p>
+      <ul className="atlas-sb-templates__list" aria-label={t('uiStatblocks.layoutAdoptionList_fantasyStatblocksLayouts')}>
         {(groups ?? []).map((group) => {
           const imported = library ? importedAs(library.templates, group.layout) : null;
           const importable = imported !== null || findLayout(app, group.layout.id) !== null || findLayout(app, group.layout.name) !== null;
           return (
             <li key={`${group.layout.id}\u0000${group.layout.name}`} className="atlas-sb-templates__row">
               <span className="atlas-sb-templates__name">{group.layout.name}</span>
-              <span className="atlas-sb-templates__detail">{imported ? `Template: ${imported.name}` : 'Not imported yet'}</span>
+              <span className="atlas-sb-templates__detail">{imported ? `Template: ${imported.name}` : t('uiStatblockDetails.layoutAdoptionList_notImportedYet')}</span>
               <span className="atlas-sb-templates__usage">{plural(statblockCount(group.statblocks), 'statblock')}</span>
-              <LabelTooltip label={importable ? `Give them ${imported ? imported.name : 'the layout\'s template'}` : NOT_IMPORTABLE} describe>
+              <LabelTooltip label={importable ? t('uiStatblockDetails.layoutAdoptionList_giveThemTemplate', { template: imported ? imported.name : t('uiStatblockDetails.layoutTemplate') }) : NOT_IMPORTABLE} describe>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -73,7 +74,7 @@ export function LayoutAdoptionList({ app, collectionId }: { app: App; collection
                   // Not `disabled`: a disabled button shows no tooltip, and this one says why.
                   onClick={importable && busy === null ? () => start(group, imported) : undefined}
                 >
-                  {busy === group.layout.name ? 'Importing…' : 'Move to Atlas…'}
+                  {busy === group.layout.name ? 'Importing…' : t('uiStatblockDetails.layoutAdoptionList_moveToAtlas')}
                 </Button>
               </LabelTooltip>
             </li>

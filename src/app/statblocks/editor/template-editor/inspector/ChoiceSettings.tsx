@@ -1,3 +1,4 @@
+import { t } from '../../../../i18n';
 import React from 'react';
 import type { FieldChanges } from '../../../model/fieldOps';
 import type { TemplateField } from '../../../model/templateTypes';
@@ -32,9 +33,9 @@ export function ChoiceSettings({ field, session, readOnly, edit }: ChoiceSetting
   return (
     <>
       <TextSetting
-        label="Choices"
+        label={t('uiTemplateEditor.choiceSettings_choices')}
         value={textFromList(field.options)}
-        placeholder="Small, Medium, Large"
+        placeholder={t('uiTemplateEditor.choiceSettings_smallMediumLarge')}
         session={session}
         disabled={readOnly}
         focusKey={CHOICES_FOCUS_KEY}
@@ -43,14 +44,14 @@ export function ChoiceSettings({ field, session, readOnly, edit }: ChoiceSetting
           if (!sameList(options, field.options)) edit({ options: options.length > 0 ? options : undefined });
         }}
       />
-      <SwitchSetting label="Pick several" value={field.several === true} onChange={(several) => edit({ several: several || undefined })} disabled={readOnly} />
-      <SwitchSetting label="Each with a number" value={field.numbered === true} onChange={(numbered) => edit({ numbered: numbered || undefined })} disabled={readOnly} />
+      <SwitchSetting label={t('uiTemplateEditor.choiceSettings_pickSeveral')} value={field.several === true} onChange={(several) => edit({ several: several || undefined })} disabled={readOnly} />
+      <SwitchSetting label={t('uiTemplateEditor.choiceSettings_eachWithANumber')} value={field.numbered === true} onChange={(numbered) => edit({ numbered: numbered || undefined })} disabled={readOnly} />
       {field.numbered && (
-        <TextSetting label="Unit" value={field.unit ?? ''} placeholder="ft." session={session} disabled={readOnly}
+        <TextSetting label={t('uiTemplateEditor.choiceSettings_unit')} value={field.unit ?? ''} placeholder="ft." session={session} disabled={readOnly}
           onText={(text) => edit({ unit: text.trim() ? text : undefined })} />
       )}
-      <SwitchSetting label="Allow other values" value={field.open === true} onChange={(open) => edit({ open: open || undefined })} disabled={readOnly} />
-      {(field.options?.length ?? 0) > 0 && <SettingNote>A statblock reads “{choiceExample(field)}”.</SettingNote>}
+      <SwitchSetting label={t('uiTemplateEditor.choiceSettings_allowOtherValues')} value={field.open === true} onChange={(open) => edit({ open: open || undefined })} disabled={readOnly} />
+      {(field.options?.length ?? 0) > 0 && <SettingNote>{t('uiMessages.choiceExample', { example: choiceExample(field) })}</SettingNote>}
     </>
   );
 }

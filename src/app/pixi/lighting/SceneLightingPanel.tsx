@@ -24,9 +24,9 @@ import { t } from '../../i18n';
 const MARGIN = 16;
 
 const DARK_SIGHT_LOOK_OPTIONS: readonly SegmentedOption<DarkSightLook>[] = [
-  { value: 'system', label: 'As the system says' },
-  { value: 'grey', label: 'Grey' },
-  { value: 'colour', label: 'In colour' },
+  { value: 'system', label: t('uiLighting.sceneLightingPanel_asTheSystemSays') },
+  { value: 'grey', label: t('uiLighting.sceneLightingPanel_grey') },
+  { value: 'colour', label: t('uiLighting.sceneLightingPanel_inColour') },
 ];
 
 /** First placement: the top right of the map, below the scene tabs, like the other map windows. */
@@ -91,7 +91,7 @@ function SceneLightingPanel(): React.ReactElement {
           onChange={(exploredMemory) => setSceneLighting({ exploredMemory })}
         />
         <ToggleField
-          label="Update sight when a token is dropped"
+          label={t('uiLighting.sceneLightingPanel_updateSightWhenATokenIsDropped')}
           value={sightOnDropOn(lighting)}
           tooltipOn="Dragging a token shows the players nothing new until you drop it"
           tooltipOff="Sight and light follow a token while you drag it"
@@ -111,9 +111,9 @@ function SceneLightingPanel(): React.ReactElement {
             setSceneLighting({ litThreshold: percent / 100 });
           }} />
         {/* Only the picture of what senses without colour show; the system's look and no tint are stored as unset. */}
-        <ChoiceField label="Darkvision looks" value={darkSightLookOf(lighting)} options={DARK_SIGHT_LOOK_OPTIONS}
+        <ChoiceField label={t('uiLighting.sceneLightingPanel_darkvisionLooks')} value={darkSightLookOf(lighting)} options={DARK_SIGHT_LOOK_OPTIONS}
           onChange={(look) => setSceneLighting({ darkSightLook: look === 'system' ? undefined : look })} />
-        <TintField label="Darkvision tint" value={darkSightTintOf(lighting)} clearLabel="No tint"
+        <TintField label={t('uiLighting.sceneLightingPanel_darkvisionTint')} value={darkSightTintOf(lighting)} clearLabel="No tint"
           onChange={(tint) => setSceneLighting({ darkSightTint: tint ?? undefined })} />
       </div>
     </motion.section>

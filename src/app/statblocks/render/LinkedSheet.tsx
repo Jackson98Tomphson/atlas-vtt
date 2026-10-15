@@ -1,3 +1,4 @@
+import { t } from '../../i18n';
 import React, { useMemo } from 'react';
 import type { App } from 'obsidian';
 import { Button } from '../../packages/components/primitives/button';
@@ -46,14 +47,14 @@ function monsterOf({ fields, template }: DrawnStatblock): StatblockMonster {
 function TemplateNotice({ statblock, onChooseTemplate }: Pick<LinkedSheetProps, 'statblock' | 'onChooseTemplate'>): React.JSX.Element | null {
   switch (statblock.templateStatus) {
     case 'auto':
-      return <p className="atlas-linked-statblock__caption">Shown with Atlas&apos; field layout</p>;
+      return <p className="atlas-linked-statblock__caption">{t('uiStatblocks.linkedSheet_shownWithAtlasFieldLayout')}</p>;
     case 'missing':
       return (
         <div className="atlas-linked-statblock__bar">
-          <span className="atlas-linked-statblock__bar-text">Template not found</span>
+          <span className="atlas-linked-statblock__bar-text">{t('uiStatblocks.linkedSheet_templateNotFound')}</span>
           {onChooseTemplate && (
             <Button type="button" variant="ghost" size="sm" onClick={() => onChooseTemplate(statblock.path)}>
-              Choose a template
+              {t('uiStatblocks.linkedSheet_chooseATemplate')}
             </Button>
           )}
         </div>
@@ -61,7 +62,7 @@ function TemplateNotice({ statblock, onChooseTemplate }: Pick<LinkedSheetProps, 
     case 'newer':
       return (
         <div className="atlas-linked-statblock__bar">
-          <span className="atlas-linked-statblock__bar-text">Made with a newer Atlas</span>
+          <span className="atlas-linked-statblock__bar-text">{t('uiStatblocks.linkedSheet_madeWithANewerAtlas')}</span>
         </div>
       );
     default:

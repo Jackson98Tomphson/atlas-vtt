@@ -1,3 +1,4 @@
+import { t } from '../../../../i18n';
 import React, { useId, useMemo, useRef, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { fieldByKey } from '../../../model/fieldKeys';
@@ -26,7 +27,7 @@ export interface FieldPickerProps {
  * statblocks use, and New field “Speed”. Enter picks, Escape closes and puts
  * the label back.
  */
-export function FieldPicker({ labelledBy, value, accepts, allowNew, disabled, placeholder = 'Choose a property', onPick }: FieldPickerProps): React.JSX.Element {
+export function FieldPicker({ labelledBy, value, accepts, allowNew, disabled, placeholder = t('uiTemplateDetails.fieldPicker_chooseAProperty'), onPick }: FieldPickerProps): React.JSX.Element {
   const { snapshot, collectionKeys } = useTemplateEditor();
   const { template } = snapshot;
   const [query, setQuery] = useState<string | null>(null);
@@ -100,7 +101,7 @@ export function FieldPicker({ labelledBy, value, accepts, allowNew, disabled, pl
       {open && (
         <FieldChoiceList
           id={listId}
-          label="Properties"
+          label={t('uiTemplateEditor.fieldPicker_properties')}
           groups={groups}
           active={highlighted}
           onHover={(choice) => setActive(choices.indexOf(choice))}

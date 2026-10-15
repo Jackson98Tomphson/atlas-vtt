@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import { observeResize } from '../../../utils/observeResize';
 import { labelElement, type LabelKind, type LabelPart } from './labelTargets';
@@ -119,7 +120,7 @@ export function LabelEditor({ stage, frame, kind, part, text, onCommit, onCancel
       value={value}
       spellCheck={false}
       autoComplete="off"
-      aria-label="Label"
+      aria-label={t('uiTemplateEditor.labelEditor_label')}
       onChange={(event) => setValue(event.target.value)}
       onKeyDown={onKeyDown}
       onBlur={() => finish(() => onCommit(value, false))}

@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React, { useId } from 'react';
 import { Select, type SelectOption } from '../../../packages/components/primitives/Select';
 import type { StatblockRole } from '../../model/roleTypes';
@@ -18,12 +19,12 @@ export interface UseForFieldProps {
 export function UseForField({ roles, value, onChange, layer }: UseForFieldProps): React.JSX.Element {
   const labelId = useId();
   const options: SelectOption<string>[] = [
-    { value: NO_ROLE, label: 'Nothing yet' },
+    { value: NO_ROLE, label: t('uiStatblocks.useForField_nothingYet') },
     ...roles.map((role) => ({ value: role.id, label: role.name })),
   ];
   return (
     <div className="atlas-te-gallery__use-for">
-      <span id={labelId} className="atlas-te-gallery__use-for-label">Starts new statblocks for</span>
+      <span id={labelId} className="atlas-te-gallery__use-for-label">{t('uiStatblocks.useForField_startsNewStatblocksFor')}</span>
       <Select value={value ?? NO_ROLE} options={options} labelledBy={labelId} onChange={(next) => onChange(next === NO_ROLE ? null : next)} layer={layer} />
     </div>
   );

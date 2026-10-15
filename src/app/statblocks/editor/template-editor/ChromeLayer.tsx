@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React, { useLayoutEffect, useState, type RefObject } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Plus } from 'lucide-react';
@@ -147,7 +148,7 @@ export function ChromeLayer(props: ChromeLayerProps): React.JSX.Element {
         );
       })}
       {gap && (
-        <LabelTooltip label="Add a block here">
+        <LabelTooltip label={t('uiTemplateEditor.chromeLayer_addABlockHere')}>
           <button
             type="button"
             tabIndex={-1}

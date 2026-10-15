@@ -1,3 +1,4 @@
+import { t } from '../../../../i18n';
 import { FuzzySuggestModal, type App, type FuzzyMatch, type TFile } from 'obsidian';
 
 /**
@@ -10,8 +11,8 @@ import { FuzzySuggestModal, type App, type FuzzyMatch, type TFile } from 'obsidi
 export class NoteTextModal extends FuzzySuggestModal<TFile> {
   constructor(app: App, private readonly skipPath: string | null, private readonly onChoose: (file: TFile) => void) {
     super(app);
-    this.setPlaceholder('Find a note to start from');
-    this.emptyStateText = 'No note matches.';
+    this.setPlaceholder(t('uiTemplateEditor.noteTextModal_findANoteToStartFrom'));
+    this.emptyStateText = t('uiTemplateDetails.noteTextModal_noNoteMatches');
   }
 
   getItems(): TFile[] {

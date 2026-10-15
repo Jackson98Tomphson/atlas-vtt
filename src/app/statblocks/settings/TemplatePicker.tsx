@@ -1,3 +1,4 @@
+import { t } from '../../i18n';
 import React from 'react';
 import { Select, type SelectOption } from '../../packages/components/primitives/Select';
 import { allBuiltInTemplates, builtInTemplate } from '../library/builtInTemplates';
@@ -29,9 +30,9 @@ export function templateOptions(
   const builtIns = allBuiltInTemplates();
   const ofSystem = new Set(systemTemplateIds);
   const ordered = [...builtIns.filter((builtIn) => ofSystem.has(builtIn.id)), ...builtIns.filter((builtIn) => !ofSystem.has(builtIn.id))]
-    .map((builtIn): SelectOption<TemplateId> => ({ value: builtIn.id, label: builtIn.name, detail: 'Built-in' }));
+    .map((builtIn): SelectOption<TemplateId> => ({ value: builtIn.id, label: builtIn.name, detail: t('uiMessages.builtIn') }));
   const state = templateState(value, library);
-  const own: SelectOption<TemplateId>[] = state === 'found' ? [] : [{ value, label: state === 'reading' ? 'Reading templates…' : 'Missing template' }];
+  const own: SelectOption<TemplateId>[] = state === 'found' ? [] : [{ value, label: state === 'reading' ? t('uiMessages.readingTemplates') : t('uiMessages.missingTemplateOption') }];
   return [...own, ...vault, ...ordered];
 }
 

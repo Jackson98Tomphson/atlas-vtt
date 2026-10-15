@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 /**
  * Fantasy Statblocks' statblocks as Atlas offers to take them over (§6.4),
  * from the file menu and the command palette: "Edit with an Atlas template…"
@@ -26,8 +27,8 @@ import { templateKeyPatch } from '../statblock-pane/templateKeyPatch';
 import { copyFenceIntoStatblock, fenceValues } from '../statblock-pane/fenceCopy';
 import { chosenRole, roleChoicesFor, roleTemplateId } from './collectionRoles';
 
-export const EDIT_WITH_TEMPLATE = 'Edit with an Atlas template…';
-export const COPY_INTO_STATBLOCK = 'Copy into a new statblock';
+export const EDIT_WITH_TEMPLATE = t('uiStatblockDetails.fsStatblockActions_editWithAnAtlasTemplate');
+export const COPY_INTO_STATBLOCK = t('uiStatblockDetails.fsStatblockActions_copyIntoANewStatblock');
 
 /** One row of the menu the action opens. */
 export interface StatblockChoice {
@@ -88,12 +89,12 @@ function layoutRow(
 ): StatblockChoice | null {
   const layout = noteLayout(app, record);
   const imported = layout ? findImportedTemplate(TemplateLibrary.forApp(app).list(), layout) : null;
-  if (imported) return { title: imported.name, hint: 'From its layout', run: () => use(imported.template.id) };
+  if (imported) return { title: imported.name, hint: t('uiStatblocks.fsStatblockActions_fromItsLayout'), run: () => use(imported.template.id) };
   const fsLayout = noteFsLayout(app, record);
   if (!fsLayout) return null;
   return {
     title: fsLayout.name,
-    hint: 'Imports its layout',
+    hint: t('uiStatblocks.fsStatblockActions_importsItsLayout'),
     run: async () => {
       const made = await importFsLayout(app, fsLayout);
       await use(made.id);
@@ -110,9 +111,9 @@ function layoutRow(
 export function adoptionChoices(app: App, notePath: string, record: FrontmatterRecord, collectionId: string | null, doc: Document): StatblockChoice[] {
   const adopt = async (templateId: TemplateId): Promise<void> => {
     const outcome = await NoteFieldWriter.forApp(app).write(notePath, [templateKeyPatch(record, templateId)]);
-    const problem = outcome.conflicts.length ? 'the note\'s template changed meanwhile.' : outcome.problem;
+    const problem = outcome.conflicts.length ? t('uiStatblockDetails.fsStatblockActions_theNoteSTemplateChangedMeanwhile') : outcome.problem;
     if (problem) {
-      showNotice(`Couldn't change the statblock: ${problem}`);
+      showNotice(t('uiStatblockDetails.fsStatblockActions_couldnTChangeTheStatblockProblem', { problem: problem }));
       return;
     }
     await openStatblockEditor(app, { notePath, collectionId, from: 'command' });
@@ -124,7 +125,7 @@ export function adoptionChoices(app: App, notePath: string, record: FrontmatterR
     if (chosen) await adopt(await roleTemplateId(app, chosen.role));
   }));
   if (!isFantasyStatblocksAvailable()) {
-    choices.push({ title: 'New template from this statblock', run: () => saveStatblockAsTemplate(app, notePath, record, collectionId) });
+    choices.push({ title: t('uiStatblocks.fsStatblockActions_newTemplateFromThisStatblock'), run: () => saveStatblockAsTemplate(app, notePath, record, collectionId) });
   }
   return choices;
 }
@@ -164,17 +165,17 @@ export async function offerFsAdoption(app: App, file: TFile, place: MenuPlace): 
   const record = cachedFrontmatter(app, file) ?? {};
   const [{ collectionId }] = await Promise.all([resolveCollectionContext(app, file.path, null), libraryLoaded(TemplateLibrary.forApp(app))]);
   const choices = adoptionChoices(app, file.path, record, collectionId, place.doc);
-  offerChoices(choices, place, `Giving ${file.path} an Atlas template`, "Couldn't change the statblock.");
+  offerChoices(choices, place, `Giving ${file.path} an Atlas template`, t('uiStatblockDetails.fsStatblockActions_couldnTChangeTheStatblock'));
 }
 
 /** "Copy into a new statblock" for a note's ```statblock fence. */
 export async function offerFenceCopy(app: App, file: TFile, place: MenuPlace): Promise<void> {
   const fence = (await statblockSourceOf(app, file))?.kind === 'fs-fence' ? await fenceValues(app, file.path) : null;
   if (!fence) {
-    showNotice('This note holds no statblock block to copy.');
+    showNotice(t('uiStatblockDetails.fsStatblockActions_thisNoteHoldsNoStatblockBlockToCopy'));
     return;
   }
   const [{ collectionId }] = await Promise.all([resolveCollectionContext(app, file.path, null), libraryLoaded(TemplateLibrary.forApp(app))]);
   const choices = fenceCopyChoices(app, file.path, fence.layout, collectionId, place.doc);
-  offerChoices(choices, place, `Copying the statblock of ${file.path}`, "Couldn't copy the statblock.");
+  offerChoices(choices, place, `Copying the statblock of ${file.path}`, t('uiStatblockDetails.fsStatblockActions_couldnTCopyTheStatblock'));
 }

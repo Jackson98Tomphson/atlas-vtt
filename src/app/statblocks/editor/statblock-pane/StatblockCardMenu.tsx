@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React from 'react';
 import { ActionsMenuButton } from '../../../packages/components/shared/ActionsMenuButton';
 import type { ContextMenuEntry } from '../../../react/components/context-menu/AtlasContextMenu';
@@ -12,7 +13,7 @@ export function StatblockCardMenu({ entries }: { entries: ContextMenuEntry[] }):
   if (entries.length === 0) return null;
   return (
     <div className="atlas-sb-card-menu">
-      <ActionsMenuButton label="Statblock options" entries={alignedEntries(entries)} className="atlas-sb-card-menu__button" />
+      <ActionsMenuButton label={t('uiStatblocks.statblockCardMenu_statblockOptions')} entries={alignedEntries(entries)} className="atlas-sb-card-menu__button" />
     </div>
   );
 }

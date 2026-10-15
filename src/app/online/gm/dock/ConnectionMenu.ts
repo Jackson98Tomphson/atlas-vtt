@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import { renderAccountMenu, type AccountActions } from './accountMenu.ts';
 
 export { accountActions } from './accountMenu.ts';
@@ -46,9 +47,9 @@ export function renderMenu(layer: HTMLElement, model: MenuModel, actions: MenuAc
     renderAccountMenu(layer, model.account, model.starting, model.lost, actions);
     return restore();
   }
-  surfaceHeader(layer, 'Online table', model.status, model.status.tone === 'green' ? null : model.status.text, [
+  surfaceHeader(layer, t('uiOnlineDetails.connectionMenu_onlineTable'), model.status, model.status.tone === 'green' ? null : model.status.text, [
     ...gateEntries(model.gate, actions),
-    { title: 'Stop table', icon: 'power', warning: true, apart: true, run: () => actions.stop() },
+    { title: t('uiOnline.connectionMenu_stopTable'), icon: 'power', warning: true, apart: true, run: () => actions.stop() },
   ], null);
   renderClosingRow(layer, model.closing, actions);
   renderPausedRow(layer, model.gate, actions);
@@ -56,7 +57,7 @@ export function renderMenu(layer: HTMLElement, model: MenuModel, actions: MenuAc
   if (model.link !== null) inviteRow(layer, () => actions.copy(), { open: model.qr, toggle: () => actions.toggleQr() });
   renderCodeRow(layer, model.gate, actions);
   if (!model.isShared) {
-    const share = textButton(layer, 'Show this map to players', () => actions.share());
+    const share = textButton(layer, t('uiOnlineDetails.connectionMenu_showThisMapToPlayers'), () => actions.share());
     share.dataset.focusKey = 'share';
     share.addClass('atlas-online-corner-button');
   }

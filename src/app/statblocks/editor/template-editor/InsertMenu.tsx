@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 import React, { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
@@ -34,8 +35,8 @@ interface InsertListProps {
 /** The kinds; the highlighted row has the context menu's hover look. */
 function InsertList({ id, items, current, onHover, onChoose }: InsertListProps): React.JSX.Element {
   return (
-    <div id={id} className="atlas-te-insert__list" role="listbox" aria-label="Kinds" {...STANDING_LIST}>
-      {items.length === 0 && <div className="atlas-te-insert__empty">Nothing matches</div>}
+    <div id={id} className="atlas-te-insert__list" role="listbox" aria-label={t('uiTemplateEditor.insertMenu_kinds')} {...STANDING_LIST}>
+      {items.length === 0 && <div className="atlas-te-insert__empty">{t('uiTemplateEditor.insertMenu_nothingMatches')}</div>}
       {items.map((item) => (
         <div
           key={itemKey(item)}
@@ -123,7 +124,7 @@ export function InsertMenu({ layer, anchor, app, onInsert, onClose }: InsertMenu
       data-above={above || undefined}
       style={style}
       role="dialog"
-      aria-label="Add"
+      aria-label={t('uiTemplateEditor.insertMenu_add')}
     >
       <motion.div className="atlas-te-insert__panel" variants={variants} initial="hidden" animate="visible" exit="exit">
         <div className="atlas-te-insert__menu">
@@ -131,8 +132,8 @@ export function InsertMenu({ layer, anchor, app, onInsert, onClose }: InsertMenu
             ref={inputRef}
             type="text"
             className="atlas-te-insert__search"
-            placeholder="Add"
-            aria-label="Find a kind"
+            placeholder={t('uiTemplateEditor.insertMenu_add')}
+            aria-label={t('uiTemplateEditor.insertMenu_findAKind')}
             role="combobox"
             aria-expanded="true"
             aria-controls={listId}

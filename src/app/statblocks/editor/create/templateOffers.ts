@@ -1,3 +1,4 @@
+import { t } from '../../../i18n';
 /**
  * What "New statblock…" offers (spec §12.2, E1): the template open in the
  * editor first, then the kinds of statblock the collection starts (its roles,
@@ -31,14 +32,14 @@ export function templateOffers({ roles, templates, preferred, changedAt }: Offer
   const byId = new Map(templates.map((entry) => [entry.template.id, entry]));
   const offers: TemplateOffer[] = [];
   const preferredEntry = preferred ? byId.get(preferred) : undefined;
-  if (preferredEntry) offers.push({ templateId: preferredEntry.template.id, label: preferredEntry.name, detail: 'The template you are editing' });
+  if (preferredEntry) offers.push({ templateId: preferredEntry.template.id, label: preferredEntry.name, detail: t('uiMessages.editingTemplate') });
   for (const role of roles) offers.push({ templateId: role.templateId, roleId: role.roleId, label: role.name, detail: role.templateName });
   const taken = new Set(offers.map((offer) => offer.templateId));
   const vault = templates.filter((entry) => !entry.builtIn && entry.status === 'ok' && !taken.has(entry.template.id))
     .sort((a, b) => changedAt(b) - changedAt(a));
-  for (const entry of vault) offers.push({ templateId: entry.template.id, label: entry.name, detail: 'Your template' });
+  for (const entry of vault) offers.push({ templateId: entry.template.id, label: entry.name, detail: t('uiMessages.yourTemplate') });
   for (const entry of templates.filter((candidate) => candidate.builtIn && !taken.has(candidate.template.id))) {
-    offers.push({ templateId: entry.template.id, label: entry.name, detail: 'Built in' });
+    offers.push({ templateId: entry.template.id, label: entry.name, detail: t('uiMessages.builtInShort') });
   }
   return offers;
 }
